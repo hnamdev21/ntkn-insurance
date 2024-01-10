@@ -50,71 +50,69 @@ const LoginPage = () => {
   };
 
   return (
-    <div className={styles.formContainer}>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Typography
-          tag="h1"
-          fontSize="fs-xl"
-          fontWeight="fw-md"
-          textAlign="center"
-          className="mb-[2.8rem]"
-        >
-          Welcome
-        </Typography>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Typography
+        tag="h1"
+        fontSize="fs-xl"
+        fontWeight="fw-md"
+        textAlign="center"
+        className="mb-[2.8rem]"
+      >
+        Welcome
+      </Typography>
 
-        <Form.Item>
-          <Label htmlFor="username">Username</Label>
-          <Input
-            type="text"
-            id="username"
-            {...register("username")}
-            error={errors.username && true}
-          />
-          {errors.username && <MessageError>{errors.username.message}</MessageError>}
-        </Form.Item>
+      <Form.Item>
+        <Label htmlFor="username">Username</Label>
+        <Input
+          type="text"
+          id="username"
+          {...register("username")}
+          error={errors.username && true}
+        />
+        {errors.username && <MessageError>{errors.username.message}</MessageError>}
+      </Form.Item>
 
-        <Form.Item>
-          <Label htmlFor="password">Password</Label>
-          <Input
-            type="password"
-            id="password"
-            {...register("password")}
-            autoComplete="on"
-            error={errors.password && true}
-          />
+      <Form.Item>
+        <Label htmlFor="password">Password</Label>
+        <Input
+          type="password"
+          id="password"
+          {...register("password")}
+          autoComplete="on"
+          error={errors.password && true}
+        />
 
-          {errors.password && <MessageError>{errors.password.message}</MessageError>}
-        </Form.Item>
+        {errors.password && <MessageError>{errors.password.message}</MessageError>}
+      </Form.Item>
 
-        <Form.Item className="-mt-[.6rem] flex w-full items-center">
-          <Input type="checkbox" id="saveLogin" {...register("saveLogin")} />
-          <Label htmlFor="saveLogin" className="inline-block ml-[.8rem] mb-[.0rem]">
-            Remember me
-          </Label>
-        </Form.Item>
+      <Form.Item className="-mt-[.6rem] flex w-full items-center">
+        <Input type="checkbox" id="saveLogin" {...register("saveLogin")} />
+        <Label htmlFor="saveLogin" className="inline-block ml-[.8rem] mb-[0.0rem]">
+          Remember me
+        </Label>
+      </Form.Item>
 
-        <Form.Item className="mb-0">
-          <Button type="submit" btnWidth="full">
-            {isSubmitting ? <Spin /> : "Login"}
-          </Button>
-        </Form.Item>
+      <Form.Item className="mb-0">
+        <Button type="submit" btnWidth="full">
+          {isSubmitting ? <Spin /> : "Login"}
+        </Button>
+      </Form.Item>
 
-        <Divider>Or</Divider>
+      <Divider>Or</Divider>
 
-        <Form.Item>
-          <Button type="button" btnWidth="full" onClick={loginWithGoogle}>
-            Login with Google
-          </Button>
-        </Form.Item>
+      <Form.Item>
+        <Button type="button" btnWidth="full" onClick={loginWithGoogle}>
+          Login with Google
+        </Button>
+      </Form.Item>
 
-        <Typography tag="p" fontSize="fs-sm" textAlign="center" className="mt-[3rem]">
-          Don&apos;t have an account?{" "}
-          <Link href={path.Register} className={styles.register}>
-            Register
-          </Link>
-        </Typography>
-      </Form>
-    </div>
+      <Typography tag="p" fontSize="fs-sm" textAlign="center" className="mt-[3rem]">
+        Don&apos;t have an account?{" "}
+        <Link href={path.Register} className={styles.register}>
+          Register
+        </Link>
+      </Typography>
+    </Form>
   );
 };
 

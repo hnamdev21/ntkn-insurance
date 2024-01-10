@@ -1,16 +1,16 @@
 .input {
   border-radius: rem(6px);
-  border: rem(1px) solid var(--color-tint-t4);
+  border: rem(1px) solid var(--border-color);
   transition: all 0.25s ease-in-out;
   outline: none;
   @include text;
 
   &:hover {
-    border-color: var(--color-primary) !important;
+    border-color: var(--color-dark) !important;
   }
 
   &:focus {
-    border-color: var(--color-primary) !important;
+    border-color: var(--color-dark) !important;
   }
 
   // Size
