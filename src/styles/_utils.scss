@@ -1,0 +1,189 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin text-12xl {
+  font-size: var(--fs-12xl);
+  font-weight: var(--fw-bold);
+  line-height: rem(140px);
+}
+
+@mixin text-10xl {
+  font-size: var(--fs-10xl);
+  font-weight: var(--fw-bold);
+  line-height: rem(120px);
+}
+
+@mixin text-6xl {
+  font-size: var(--fs-6xl);
+  font-weight: var(--fw-bold);
+  line-height: rem(72px);
+}
+
+@mixin text-4xl {
+  font-size: var(--fs-4xl);
+  font-weight: var(--fw-bold);
+  line-height: rem(50px);
+}
+
+@mixin text-3xl {
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+  line-height: rem(48px);
+}
+
+@mixin text-2xl {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-md);
+  line-height: rem(42px);
+}
+
+@mixin text-xl {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-md);
+  line-height: rem(38px);
+}
+
+@mixin text-lg {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-normal);
+  line-height: rem(28px);
+}
+
+@mixin text-md {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-md);
+  line-height: rem(26px);
+}
+
+@mixin text-normal {
+  font-size: var(--fs-normal);
+  font-weight: var(--fw-md);
+  line-height: rem(24px);
+}
+
+@mixin text-sm {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-normal);
+  line-height: rem(20px);
+}
+
+@mixin text-xs {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-normal);
+  line-height: rem(16px);
+}
+
+@mixin text {
+  &.fs-12xl {
+    @include text-12xl;
+  }
+
+  &.fs-10xl {
+    @include text-10xl;
+  }
+
+  &.fs-6xl {
+    @include text-6xl;
+  }
+
+  &.fs-4xl {
+    @include text-4xl;
+  }
+
+  &.fs-3xl {
+    @include text-3xl;
+  }
+
+  &.fs-2xl {
+    @include text-2xl;
+  }
+
+  &.fs-xl {
+    @include text-xl;
+  }
+
+  &.fs-lg {
+    @include text-lg;
+  }
+
+  &.fs-md {
+    @include text-md;
+  }
+
+  &.fs-normal {
+    @include text-normal;
+  }
+
+  &.fs-sm {
+    @include text-sm;
+  }
+
+  &.fs-xs {
+    @include text-xs;
+  }
+
+  &.fs-3xl {
+    @include text-3xl;
+  }
+
+  &.fs-2xl {
+    @include text-2xl;
+  }
+
+  &.fs-xl {
+    @include text-xl;
+  }
+
+  &.fs-lg {
+    @include text-lg;
+  }
+
+  &.fs-md {
+    @include text-md;
+  }
+
+  &.fs-normal {
+    @include text-normal;
+  }
+
+  &.fs-sm {
+    @include text-sm;
+  }
+
+  &.fs-xs {
+    @include text-xs;
+  }
+}

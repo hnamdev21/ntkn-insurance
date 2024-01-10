@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-size: var(--fs-normal);
+  font-weight: var(--fw-normal);
+  background-color: rgba(240, 241, 236, 1);
+}

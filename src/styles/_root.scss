@@ -1,0 +1,55 @@
+:root {
+  // Font size
+  --fs-special: 37rem;
+  --fs-12xl: 12rem;
+  --fs-10xl: 10rem;
+  --fs-6xl: 6rem;
+  --fs-4xl: 4.8rem;
+  --fs-3xl: 4rem;
+  --fs-2xl: 3.4rem;
+  --fs-xl: 3rem;
+  --fs-lg: 2rem;
+  --fs-md: 1.8rem;
+  --fs-normal: 1.6rem;
+  --fs-sm: 1.4rem;
+  --fs-xs: 1.2rem;
+
+  // Font weight
+  --fw-extra-bold: 900;
+  --fw-bold: 700;
+  --fw-md: 500;
+  --fw-normal: 400;
+  --fw-thin: 300;
+
+  // Color
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-dark-blue: #090c1c;
+  --color-primary: #28cb8b;
+  --color-secondary: #263238;
+  --color-danger: #e53835;
+  --color-success: #2e7d31;
+  --color-warning: #fbc02d;
+  --color-info: #2194f3;
+  --color-dark: #282d31;
+  --color-light: #f5f7fa;
+
+  --color-shade-t1: #43a046;
+  --color-shade-t2: #388e3b;
+  --color-shade-t3: #2e7d31;
+  --color-shade-t4: #1b5e1f;
+  --color-shade-t5: #103e13;
+
+  --color-tint-t1: #66bb69;
+  --color-tint-t2: #81c784;
+  --color-tint-t3: #a5d6a7;
+  --color-tint-t4: #c8e6c9;
+  --color-tint-t5: #e8f5e9;
+
+  // Box shadow
+  --16px-shadow: 0 1.6rem 3.2rem 0 rgba(171, 190, 209, 0.3);
+  --8px-shadow: 0 0.8rem 1.6rem 0 rgba(171, 190, 209, 0.4);
+  --6px-shadow: 0 0.6rem 1.2rem 0 rgba(171, 190, 209, 0.3);
+  --4px-shadow: 0 0.4rem 0.8rem 0 rgba(171, 190, 209, 0.4);
+  --2px-shadow: 0 0.2rem 0.4rem 0 rgba(171, 190, 209, 0.6);
+}
