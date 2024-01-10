@@ -1,0 +1,5 @@
+.typography {
+  color: var(--color-dark);
+
+  @include text;
+}
