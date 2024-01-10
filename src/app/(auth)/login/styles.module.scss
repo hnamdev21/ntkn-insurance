@@ -1,0 +1,16 @@
+.formContainer {
+  width: 20%;
+
+  .title {
+    margin-bottom: rem(36px);
+  }
+
+  .register {
+    color: var(--color-primary);
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.4;
+    }
+  }
+}
