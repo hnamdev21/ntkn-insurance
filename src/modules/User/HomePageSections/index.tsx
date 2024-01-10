@@ -8,8 +8,8 @@ const HomeModule = () => {
   return (
     <>
       <HeroSection />
-      <BentoSection />
       <CTASection />
+      <BentoSection />
     </>
   );
 };
