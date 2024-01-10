@@ -1,7 +1,6 @@
 .input {
   border-radius: rem(6px);
-  border: rem(1px) solid var(--color-light);
-  @include text;
+  border: rem(1px) solid var(--color-tint-t4);
   transition: all 0.25s ease-in-out;
   outline: none;
   @include text;

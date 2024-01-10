@@ -19,17 +19,14 @@ import styles from "./styles.module.scss";
 
 const TIMEOUT = 1000;
 const formValidator = yup.object().shape({
-  username: yup.string().required("Please enter username"),
-  password: yup.string().required("Please enter password"),
+  username: yup.string().required("Please enter your username"),
+  password: yup.string().required("Please enter your password"),
   saveLogin: yup.boolean(),
 });
 
 const LoginPage = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting, errors },
-  } = useForm({
+  // prettier-ignore
+  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm({
     resolver: yupResolver(formValidator),
     mode: "onBlur",
   });
@@ -58,9 +55,9 @@ const LoginPage = () => {
         <Typography
           tag="h1"
           fontSize="fs-xl"
-          fontWeight="fw-bold"
+          fontWeight="fw-md"
           textAlign="center"
-          className="mb-[2rem]"
+          className="mb-[2.8rem]"
         >
           Welcome
         </Typography>
@@ -89,9 +86,9 @@ const LoginPage = () => {
           {errors.password && <MessageError>{errors.password.message}</MessageError>}
         </Form.Item>
 
-        <Form.Item className="-mt-[.6rem]">
+        <Form.Item className="-mt-[.6rem] flex w-full items-center">
           <Input type="checkbox" id="saveLogin" {...register("saveLogin")} />
-          <Label htmlFor="saveLogin" className="inline-block ml-[.8rem] mb-0" fontSize="fs-sm">
+          <Label htmlFor="saveLogin" className="inline-block ml-[.8rem] mb-[.0rem]">
             Remember me
           </Label>
         </Form.Item>

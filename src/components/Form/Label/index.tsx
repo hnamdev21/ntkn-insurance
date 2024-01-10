@@ -13,7 +13,7 @@ type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
 function Label({
   htmlFor,
   children,
-  fontSize = "fs-normal",
+  fontSize = "fs-sm",
   fontWeight = "fw-normal",
   textColor = "txtClr-dark",
   italic = false,
