@@ -62,7 +62,7 @@
     color: var(--color-dark);
 
     &:hover {
-      background-color: var(--color-tint-t5);
+      background-color: var(--color-tint-t3);
       color: var(--color-secondary);
     }
   }
@@ -80,7 +80,7 @@
       content: "";
       position: absolute;
       left: 0;
-      bottom: 0;
+      bottom: rem(4px);
       width: 100%;
       height: rem(2px);
       transform: scaleX(0);
@@ -91,7 +91,7 @@
 
     &:hover {
       background-color: transparent;
-      color: var(--color-tint-t1);
+      color: var(--color-shade-t1);
 
       &:after {
         width: 100%;

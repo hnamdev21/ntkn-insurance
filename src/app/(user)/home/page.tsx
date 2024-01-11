@@ -1,7 +1,9 @@
 import React from "react";
 
+import HomeModule from "@/modules/User/HomePageSections";
+
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return <HomeModule />;
 };
 
 export default HomePage;
