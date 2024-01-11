@@ -23,28 +23,31 @@
 
   // Color
   --color-white: #ffffff;
-  --color-black: #000000;
-  --color-dark-blue: #090c1c;
-  --color-primary: #28cb8b;
-  --color-secondary: #263238;
-  --color-danger: #e53835;
-  --color-success: #2e7d31;
-  --color-warning: #fbc02d;
+  --color-gray: #98a2b3;
+  --color-black: #06080e;
+  --color-dark-blue: #101828;
+  --color-primary: #7f56d9;
+  --color-secondary: #42307d;
+  --color-danger: #d92d20;
+  --color-success: ##32d583;
+  --color-warning: #fec84b;
   --color-info: #2194f3;
   --color-dark: #282d31;
-  --color-light: #f5f7fa;
+  --color-light: #f2f4f7;
 
-  --color-shade-t1: #43a046;
-  --color-shade-t2: #388e3b;
-  --color-shade-t3: #2e7d31;
-  --color-shade-t4: #1b5e1f;
-  --color-shade-t5: #103e13;
+  --color-shade-t1: #9e77ed;
+  --color-shade-t2: #7f56d9;
+  --color-shade-t3: #6941c6;
+  --color-shade-t4: #53389e;
+  --color-shade-t5: #42307d;
 
-  --color-tint-t1: #66bb69;
-  --color-tint-t2: #81c784;
-  --color-tint-t3: #a5d6a7;
-  --color-tint-t4: #c8e6c9;
-  --color-tint-t5: #e8f5e9;
+  --color-tint-t1: #b692f6;
+  --color-tint-t2: #d6bbfb;
+  --color-tint-t3: #e9d7fe;
+  --color-tint-t4: #f4ebff;
+  --color-tint-t5: #f9f5ff;
+
+  --border-color: #1011110f;
 
   // Box shadow
   --16px-shadow: 0 1.6rem 3.2rem 0 rgba(171, 190, 209, 0.3);
