@@ -72,3 +72,20 @@
   &.radio {
   }
 }
+
+.fieldContainer {
+  position: relative;
+
+  .eyeIconContainer {
+    position: absolute;
+    top: 50%;
+    right: rem(12px);
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

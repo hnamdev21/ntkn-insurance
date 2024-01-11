@@ -8,7 +8,7 @@ import * as yup from "yup";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
-import Input from "@/components/Form/Input";
+import Input, { InputPassword } from "@/components/Form/Input";
 import Label from "@/components/Form/Label";
 import MessageError from "@/components/Form/MessageError";
 import Typography from "@/components/Typography";
@@ -73,8 +73,7 @@ function RegisterPage() {
         <Label htmlFor="password" required>
           Password
         </Label>
-        <Input
-          type="password"
+        <InputPassword
           id="password"
           {...register("password")}
           autoComplete="on"
@@ -87,8 +86,7 @@ function RegisterPage() {
         <Label htmlFor="confirmPassword" required>
           Confirm password
         </Label>
-        <Input
-          type="password"
+        <InputPassword
           id="confirmPassword"
           {...register("confirmPassword")}
           autoComplete="on"
