@@ -2,7 +2,6 @@
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Spin } from "antd";
-import Link from "next/link";
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -30,11 +29,8 @@ const formValidator = yup.object().shape({
 });
 
 function RegisterPage() {
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting, errors },
-  } = useForm({
+  // prettier-ignore
+  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm({
     resolver: yupResolver(formValidator),
     mode: "onBlur",
   });
@@ -133,9 +129,15 @@ function RegisterPage() {
 
       <Typography tag="p" fontSize="fs-sm" textAlign="center" className="mt-[3rem]">
         Already have an account?{" "}
-        <Link href={path.Login} className={styles.login}>
+        <Button
+          as="a"
+          href={path.Login}
+          className={styles.link}
+          btnVariant="tertiary"
+          underlineAnimation
+        >
           Login now
-        </Link>
+        </Button>
       </Typography>
     </Form>
   );

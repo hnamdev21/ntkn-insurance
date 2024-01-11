@@ -2,7 +2,6 @@
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Divider, Spin } from "antd";
-import Link from "next/link";
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -108,9 +107,15 @@ const LoginPage = () => {
 
       <Typography tag="p" fontSize="fs-sm" textAlign="center" className="mt-[3rem]">
         Don&apos;t have an account?{" "}
-        <Link href={path.Register} className={styles.register}>
+        <Button
+          as="a"
+          href={path.Login}
+          className={styles.link}
+          btnVariant="tertiary"
+          underlineAnimation
+        >
           Register
-        </Link>
+        </Button>
       </Typography>
     </Form>
   );
