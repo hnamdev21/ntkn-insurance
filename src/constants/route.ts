@@ -1,7 +1,7 @@
 import { GiftIcon, HomeIcon, LayersIcon, UserIcon } from "@/components/Icons";
 
 export const path = {
-  Home: "/",
+  Home: "/home",
   Shop: "/shop",
   Register: "/register",
   Login: "/login",

@@ -73,8 +73,11 @@
     background-color: transparent;
     border: none;
     border-radius: unset;
-    color: var(--color-primary);
     padding: rem(8px) 0;
+
+    &.primary {
+      color: var(--color-primary);
+    }
 
     &:after {
       content: "";
