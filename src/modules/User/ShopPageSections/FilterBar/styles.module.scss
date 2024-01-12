@@ -1,0 +1,6 @@
+.filterBar {
+  border: rem(1px) solid var(--color-primary);
+  box-shadow: var(--4px-shadow);
+  background-color: rgba($color: #ffffff, $alpha: 0.95);
+  backdrop-filter: blur(rem(8px));
+}

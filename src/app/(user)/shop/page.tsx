@@ -1,7 +1,9 @@
 import React from "react";
 
+import ShopModule from "@/modules/User/ShopPageSections";
+
 const ShopPage = () => {
-  return <div>ShopPage</div>;
+  return <ShopModule />;
 };
 
 export default ShopPage;

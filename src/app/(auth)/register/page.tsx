@@ -53,7 +53,7 @@ function RegisterPage() {
         textAlign="center"
         className="mb-[2.8rem]"
       >
-        Create an account
+        Create An Account
       </Typography>
 
       <Form.Item>
@@ -121,7 +121,7 @@ function RegisterPage() {
 
       <Form.Item className="mb-0">
         <Button type="submit" btnWidth="full">
-          {isSubmitting ? <Spin /> : "Create account"}
+          {isSubmitting ? <Spin /> : "Create"}
         </Button>
       </Form.Item>
 

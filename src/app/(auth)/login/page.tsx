@@ -111,7 +111,7 @@ const LoginPage = () => {
           btnVariant="tertiary"
           underlineAnimation
           className={styles.link}
-          href={path.Login}
+          href={path.Register}
         >
           Register
         </Button>
