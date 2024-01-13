@@ -6,7 +6,7 @@ import React from "react";
 import styles from "./styles.module.scss";
 
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
-  onSubmit: (data: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit?: (data: React.FormEvent<HTMLFormElement>) => void;
   children: React.ReactNode;
 }
 

@@ -16,21 +16,13 @@ type NavItem = {
 type NavProps = React.HTMLAttributes<HTMLDivElement> & {
   items: NavItem[];
   showIcon?: boolean;
-  underlineAnimation?: boolean;
 };
 
-function Nav({
-  items,
-  color,
-  showIcon = false,
-  underlineAnimation = false,
-  className = "",
-  ...props
-}: NavProps) {
+function Nav({ items, showIcon = false, className = "", ...props }: NavProps) {
   const pathname = usePathname();
 
   return (
-    <nav className={`flex gap-2 ${styles.nav} ${className}`} {...props}>
+    <nav className={`flex gap-[1.8rem] ${styles.nav} ${className}`} {...props}>
       {items.map((item) => {
         const active = pathname.includes(item.path);
 
@@ -39,11 +31,11 @@ function Nav({
             <Button
               as="a"
               href={item.path}
-              btnVariant={active ? "primary" : "plain"}
+              btnVariant={active ? "tertiary" : "plain"}
               btnWidth="full"
               className={`flex items-center gap-[1.2rem] font-bold ${styles.link}`}
-              underlineAnimation={underlineAnimation}
-              color={color}
+              underlineAnimation
+              textColor={active ? "txtClr-primary" : "txtClr-secondary"}
             >
               {showIcon && item.icon && <item.icon className={active ? "fill-white" : ""} />}
               {item.label}
