@@ -1,6 +1,13 @@
 .title {
   font-size: var(--fs-special);
   font-weight: var(--fw-md);
-  line-height: calc(var(--fs-special) * 0.925);
-  letter-spacing: rem(-29.6px);
+  line-height: calc(var(--fs-special) * 1.2);
+  letter-spacing: rem(-10px);
+  word-spacing: rem(24px);
+  margin-bottom: rem(42px);
+}
+
+.banner {
+  border-radius: rem(28px);
+  overflow: hidden;
 }

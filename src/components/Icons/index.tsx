@@ -12,7 +12,7 @@ export const LogoIcon = ({ className = "" }: Props) => {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <rect width="40" height="40" rx="8" fill="#7f56d9" />
+      <rect width="40" height="40" rx="8" fill="#f97316" />
       <mask
         id="mask0_0_22048"
         style={{ maskType: "luminance" }}
