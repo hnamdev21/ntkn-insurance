@@ -8,7 +8,7 @@ export const path = {
   News: "/news",
   About: "/about",
   Contact: "/contact",
-  FAQ: "/faq",
+  FAQs: "/faqs",
   Register: "/register",
   Login: "/login",
 } as const;
@@ -39,9 +39,9 @@ export const route = {
     path: path.News,
     label: "News",
   },
-  FAQ: {
-    path: path.FAQ,
-    label: "FAQ",
+  FAQs: {
+    path: path.FAQs,
+    label: "FAQs",
   },
   Register: {
     path: path.Register,

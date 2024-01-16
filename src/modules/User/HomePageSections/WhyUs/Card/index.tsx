@@ -3,7 +3,7 @@ import React from "react";
 import Typography from "@/components/Typography";
 
 type CardProps = React.HTMLAttributes<HTMLDivElement> & {
-  icon?: any;
+  icon?: (props: React.SVGProps<SVGSVGElement>) => React.ReactElement;
   title: string;
 };
 

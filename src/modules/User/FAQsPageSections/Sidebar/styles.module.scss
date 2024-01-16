@@ -1,0 +1,38 @@
+.sidebar {
+  padding: rem(20px) 0;
+  background-color: #fff;
+  border-radius: rem(8px);
+  box-shadow: var(--4px-shadow);
+
+  .item {
+    position: relative;
+    cursor: pointer;
+    padding: rem(10px) rem(20px);
+    transition: all 0.25s ease-in-out;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      color: var(--color-primary);
+      background-color: var(--color-tint-t5);
+    }
+
+    &.active {
+      color: var(--color-primary);
+      background-color: var(--color-tint-t5);
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: rem(8px);
+        height: 100%;
+        border-radius: 0 rem(8px) rem(8px) 0;
+        background-color: var(--color-primary);
+      }
+    }
+  }
+}
