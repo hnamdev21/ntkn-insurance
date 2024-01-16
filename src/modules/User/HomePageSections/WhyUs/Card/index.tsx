@@ -9,7 +9,11 @@ type CardProps = React.HTMLAttributes<HTMLDivElement> & {
 
 const Card = ({ title, children, ...props }: CardProps) => {
   return (
-    <div className="p-[2.2rem] rounded-md overflow-hidden bg-white flex-1" {...props}>
+    <div
+      className="p-[2.2rem] rounded-2xl overflow-hidden bg-white flex-1"
+      style={{ filter: "drop-shadow(rgba(24, 48, 40, 0.2) 0px 0px 8px)" }}
+      {...props}
+    >
       <Typography
         tag="h3"
         fontWeight="fw-bold"
