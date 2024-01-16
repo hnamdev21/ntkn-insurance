@@ -1,0 +1,31 @@
+.collapse {
+  .item {
+    cursor: pointer;
+    margin-bottom: rem(12px);
+    border-bottom: rem(1px) solid var(--color-gray);
+
+    &:not(:first-child) {
+      margin-top: rem(18px);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.active {
+      border-color: var(--color-primary);
+    }
+
+    .content {
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0, 1, 0, 1);
+
+      &.active {
+        height: auto;
+        max-height: rem(9999px);
+        transition: all 0.3s cubic-bezier(1, 0, 1, 0);
+      }
+    }
+  }
+}

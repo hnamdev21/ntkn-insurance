@@ -37,7 +37,7 @@ const Sidebar = ({ className, ...props }: SidebarProps) => {
   const classes = cn(styles.sidebar, className);
 
   return (
-    <div className={classes} {...props}>
+    <div className={classes}>
       {props.as === "list" && (
         <ul>
           {props.items.map((item) => (

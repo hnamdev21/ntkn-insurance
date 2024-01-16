@@ -2,30 +2,13 @@
 
 import React from "react";
 
+import Collapse from "@/components/Collapse";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Typography from "@/components/Typography";
 
+import { collapseItems, items } from "./data";
 import Sidebar, { StatusItem } from "./Sidebar";
-
-const items: StatusItem[] = [
-  {
-    label: "Contract services",
-    value: "contract-services",
-  },
-  {
-    label: "Insurance fee",
-    value: "insurance-fee",
-  },
-  {
-    label: "Health care benefits",
-    value: "health-care-benefits",
-  },
-  {
-    label: "Other",
-    value: "other",
-  },
-];
 
 const FAQsModule = () => {
   const [activeItem, setActiveItem] = React.useState<StatusItem>(items[0]);
@@ -50,15 +33,19 @@ const FAQsModule = () => {
       </Section>
 
       <Section>
-        <Container className="flex gap-[2.4rem]">
+        <Container className="flex items-start gap-[12.4rem]">
           <Sidebar
             as="list"
             items={items}
-            className="w-1/5"
+            className="w-1/6"
             onChange={(item) => setActiveItem(item as unknown as StatusItem)}
             currentItem={activeItem}
           />
-          <div className="flex-1"></div>
+          <div className="flex-1">
+            {collapseItems[activeItem.value] && (
+              <Collapse items={collapseItems[activeItem.value]} />
+            )}
+          </div>
         </Container>
       </Section>
     </>
