@@ -15,10 +15,6 @@ export const path = {
 export type Path = (typeof path)[keyof typeof path];
 
 export const route = {
-  Home: {
-    path: path.Home,
-    label: "Home",
-  },
   Policies: {
     path: path.Policies,
     label: "Policies",
