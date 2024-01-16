@@ -2,13 +2,15 @@ import { GiftIcon, HomeIcon, LayersIcon, UserIcon } from "@/components/Icons";
 
 export const path = {
   Home: "/home",
-  Shop: "/shop",
+  Policies: "/policies",
+  Claims: "/claims",
+  Loans: "/loans",
+  News: "/news",
+  About: "/about",
+  Contact: "/contact",
+  FAQ: "/faq",
   Register: "/register",
   Login: "/login",
-  Cart: "/cart",
-  Instagram: "/instagram",
-  Facebook: "/facebook",
-  FAQ: "/faq",
 } as const;
 export type Path = (typeof path)[keyof typeof path];
 
@@ -17,9 +19,33 @@ export const route = {
     path: path.Home,
     label: "Home",
   },
-  Shop: {
-    path: path.Shop,
-    label: "Shop",
+  Policies: {
+    path: path.Policies,
+    label: "Policies",
+  },
+  Claims: {
+    path: path.Claims,
+    label: "Claims",
+  },
+  Loans: {
+    path: path.Loans,
+    label: "Loans",
+  },
+  About: {
+    path: path.About,
+    label: "About",
+  },
+  Contact: {
+    path: path.Contact,
+    label: "Contact",
+  },
+  News: {
+    path: path.News,
+    label: "News",
+  },
+  FAQ: {
+    path: path.FAQ,
+    label: "FAQ",
   },
   Register: {
     path: path.Register,
@@ -29,33 +55,24 @@ export const route = {
     path: path.Login,
     label: "Login",
   },
-  Cart: {
-    path: path.Cart,
-    label: "Cart",
-  },
-  Instagram: {
-    path: path.Instagram,
-    label: "Instagram",
-  },
-  Facebook: {
-    path: path.Facebook,
-    label: "Facebook",
-  },
-  FAQ: {
-    path: path.FAQ,
-    label: "FAQ",
-  },
 } as const;
 export type Route = (typeof route)[keyof typeof route];
+
+export const headerRoutes = Object.values(route).filter(
+  (route) => route.path !== path.Login && route.path !== path.Register
+);
 
 export const adminPath = {
   Admin: "/admin",
   Dashboard: "/admin/dashboard",
   Products: "/admin/products",
   Users: "/admin/users",
-  Invoices: "/admin/invoices",
-  Orders: "/admin/orders",
-  Blogs: "/admin/blogs",
+  News: "/admin/news",
+  Policies: "/admin/policies",
+  Claims: "/admin/claims",
+  Loans: "/admin/loans",
+  Payments: "/admin/payments",
+  Logs: "/admin/logs",
 } as const;
 export type AdminPath = (typeof adminPath)[keyof typeof adminPath];
 
@@ -79,20 +96,58 @@ export const adminRoute = {
     label: "Users",
     icon: UserIcon,
   },
-  Invoices: {
-    path: adminPath.Invoices,
-    label: "Invoices",
+  News: {
+    path: adminPath.News,
+    label: "News",
     icon: LayersIcon,
   },
-  Orders: {
-    path: adminPath.Orders,
-    label: "Orders",
+  Policies: {
+    path: adminPath.Policies,
+    label: "Policies",
     icon: LayersIcon,
   },
-  Blogs: {
-    path: adminPath.Blogs,
-    label: "Blogs",
+  Claims: {
+    path: adminPath.Claims,
+    label: "Claims",
+    icon: LayersIcon,
+  },
+  Loans: {
+    path: adminPath.Loans,
+    label: "Loans",
+    icon: LayersIcon,
+  },
+  Payments: {
+    path: adminPath.Payments,
+    label: "Payments",
+    icon: LayersIcon,
+  },
+  Logs: {
+    path: adminPath.Logs,
+    label: "Logs",
     icon: LayersIcon,
   },
 } as const;
 export type AdminRoute = (typeof adminRoute)[keyof typeof adminRoute];
+
+export const adminRoutes = Object.values(adminRoute).filter(
+  (route) => route.path !== adminPath.Admin
+);
+
+export const socialPath = {
+  Instagram: "/instagram",
+  Facebook: "/facebook",
+};
+
+export const socialRoute = {
+  Instagram: {
+    path: socialPath.Instagram,
+    label: "Instagram",
+  },
+  Facebook: {
+    path: socialPath.Facebook,
+    label: "Facebook",
+  },
+} as const;
+export type SocialRoute = (typeof socialRoute)[keyof typeof socialRoute];
+
+export const socialRoutes = Object.values(socialRoute);
