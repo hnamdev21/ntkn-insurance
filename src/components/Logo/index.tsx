@@ -21,7 +21,7 @@ function Logo({ hasText = false, className = "", ...props }: LogoProps) {
 
         {hasText && (
           <Typography className="ml-2" fontSize="fs-3xl">
-            Logo
+            NTKN
           </Typography>
         )}
       </Link>

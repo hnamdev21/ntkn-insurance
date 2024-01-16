@@ -5,15 +5,16 @@ import { Text } from "@/components/Typography";
 
 import styles from "./styles.module.scss";
 
-type Options = {
+type Option = {
   value: string;
-  label: React.ReactNode;
+  label: string;
 };
 
 type SelectComponentProps = React.HTMLAttributes<HTMLSelectElement> & {
   id: string;
   name: string;
-  options: Options[];
+  value?: string;
+  options: Option[];
 } & Text;
 
 function SelectComponent(
@@ -29,6 +30,7 @@ function SelectComponent(
     textAlign = "center",
     textTransform,
     className = "",
+    value,
     ...props
   }: SelectComponentProps,
   ref?: React.Ref<HTMLSelectElement>
@@ -48,7 +50,12 @@ function SelectComponent(
   return (
     <select id={id} name={name} {...props} className={classes} ref={ref}>
       {options.map((option) => (
-        <option key={option.value} value={option.value} className={styles.option}>
+        <option
+          key={option.value}
+          value={option.value}
+          className={styles.option}
+          selected={option.value === value}
+        >
           {option.label}
         </option>
       ))}
