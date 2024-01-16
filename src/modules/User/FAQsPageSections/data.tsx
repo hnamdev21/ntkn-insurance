@@ -1,7 +1,6 @@
 import { CollapseItem } from "@/components/Collapse";
+import { StatusItem } from "@/components/Sidebar";
 import Typography from "@/components/Typography";
-
-import { StatusItem } from "./Sidebar";
 
 export const items: StatusItem[] = [
   {
