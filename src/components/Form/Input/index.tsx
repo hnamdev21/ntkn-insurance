@@ -19,7 +19,6 @@ function InputComponent(
     sizeElement = "normal",
     width = "full",
     error = false,
-    children,
     className = "",
     fontSize = "fs-normal",
     fontWeight = "fw-normal",
@@ -50,11 +49,7 @@ function InputComponent(
     className
   );
 
-  return (
-    <input type={type} {...props} className={classes} ref={ref}>
-      {children}
-    </input>
-  );
+  return <input type={type} {...props} className={classes} ref={ref} />;
 }
 
 InputComponent.Password = function InputPasswordComponent(
@@ -62,7 +57,6 @@ InputComponent.Password = function InputPasswordComponent(
     sizeElement = "normal",
     width = "full",
     error = false,
-    children,
     className = "",
     fontSize = "fs-normal",
     fontWeight = "fw-normal",
@@ -95,9 +89,7 @@ InputComponent.Password = function InputPasswordComponent(
 
   return (
     <div className={styles.fieldContainer}>
-      <input {...props} type={isShowPassword ? "text" : "password"} className={classes} ref={ref}>
-        {children}
-      </input>
+      <input {...props} type={isShowPassword ? "text" : "password"} className={classes} ref={ref} />
       <span
         className={`${styles.eyeIconContainer}`}
         onClick={() => setIsShowPassword(!isShowPassword)}

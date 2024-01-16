@@ -1,0 +1,22 @@
+.textarea {
+  border-radius: rem(6px);
+  border: rem(1px) solid var(--border-color);
+  transition: all 0.25s ease-in-out;
+  outline: none;
+  width: 100%;
+  height: rem(160px);
+  @include text;
+  padding: rem(8px);
+
+  &:hover {
+    border-color: var(--color-dark) !important;
+  }
+
+  &:focus {
+    border-color: var(--color-dark) !important;
+  }
+
+  &.error {
+    border-color: var(--color-danger) !important;
+  }
+}
