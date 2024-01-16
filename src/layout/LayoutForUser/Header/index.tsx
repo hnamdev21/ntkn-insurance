@@ -4,11 +4,9 @@ import Button from "@/components/Button";
 import Container from "@/components/Container";
 import Logo from "@/components/Logo";
 import Nav from "@/components/Nav";
-import { path, route } from "@/constants/route";
+import { headerRoutes, path } from "@/constants/route";
 
 import styles from "./styles.module.scss";
-
-const userRoutes = [route.Home, route.Shop];
 
 function Header() {
   return (
@@ -16,7 +14,7 @@ function Header() {
       <Container className="flex justify-between items-center py-[1rem]">
         <div className="flex items-center gap-[3.6rem]">
           <Logo hasText />
-          <Nav items={userRoutes} />
+          <Nav items={headerRoutes} />
         </div>
 
         <div className="flex items-center gap-[.5rem]">

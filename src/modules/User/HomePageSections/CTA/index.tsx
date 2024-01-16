@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 
 import Container from "@/components/Container";
@@ -7,27 +6,18 @@ import Typography from "@/components/Typography";
 
 const CTASection = () => {
   return (
-    <Section style={{ backgroundColor: "var(--color-black)" }}>
+    <Section style={{ backgroundColor: "var(--color-primary)" }}>
       <Container className="flex md:gap-[4.8rem]">
-        <div className="w-2/5">
-          <Image src="/images/cta-section.png" alt="Banner" width={1980} height={1020} priority />
-        </div>
-
-        <div className="flex flex-col justify-center flex-1 pr-[32rem]">
+        <div className="flex flex-col justify-center flex-1">
           <Typography
             tag="h2"
             className="mb-4"
             fontWeight="fw-md"
-            fontSize="fs-xl"
+            fontSize="fs-4xl"
             textColor="txtClr-white"
+            textAlign="center"
           >
-            Lorem ipsum dolor sit amet.
-          </Typography>
-
-          <Typography textColor="txtClr-light" fontWeight="fw-thin">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna
-            mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit. Etiam
-            porta sem malesuada magna mollis euismod. Donec sed odio dui.
+            All your needs in one place
           </Typography>
         </div>
       </Container>

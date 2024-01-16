@@ -29,7 +29,8 @@
     color: var(--color-primary);
 
     &:hover {
-      background-color: var(--color-tint-t1);
+      // background-color: var(--color-tint-t5);
+      box-shadow: inset 0 0 0 rem(1px) var(--color-primary);
     }
   }
 
@@ -62,7 +63,7 @@
     color: var(--color-dark);
 
     &:hover {
-      background-color: var(--color-tint-t3);
+      background-color: var(--color-tint-t4);
       color: var(--color-secondary);
     }
   }
