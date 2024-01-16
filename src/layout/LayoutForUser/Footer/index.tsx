@@ -8,7 +8,10 @@ import { headerRoutes, socialRoutes } from "@/constants/route";
 
 const Footer = () => {
   return (
-    <footer className="hidden md:block">
+    <footer
+      className="hidden md:block border-t border-solid"
+      style={{ borderColor: "var(--color-primary)" }}
+    >
       <Container className="py-[2.4rem] flex px-[8rem]">
         <div className="w-1/4">
           <Logo hasText />

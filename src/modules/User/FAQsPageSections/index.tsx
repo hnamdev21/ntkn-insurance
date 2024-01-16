@@ -5,10 +5,10 @@ import React from "react";
 import Collapse from "@/components/Collapse";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
+import Sidebar, { StatusItem } from "@/components/Sidebar";
 import Typography from "@/components/Typography";
 
 import { collapseItems, items } from "./data";
-import Sidebar, { StatusItem } from "./Sidebar";
 
 const FAQsModule = () => {
   const [activeItem, setActiveItem] = React.useState<StatusItem>(items[0]);

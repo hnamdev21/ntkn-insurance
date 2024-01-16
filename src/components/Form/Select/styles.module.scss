@@ -1,5 +1,10 @@
 .select {
-  border-radius: rem(8px);
+  width: 100%;
+  border-radius: rem(6px);
+  border: rem(1px) solid var(--border-color);
+  transition: all 0.25s ease-in-out;
+  outline: none;
+  padding: rem(8px) rem(12px);
   @include text;
 
   .option {
