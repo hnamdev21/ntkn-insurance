@@ -48,14 +48,9 @@ function SelectComponent(
   );
 
   return (
-    <select id={id} name={name} {...props} className={classes} ref={ref}>
+    <select id={id} name={name} {...props} defaultValue={value} className={classes} ref={ref}>
       {options.map((option) => (
-        <option
-          key={option.value}
-          value={option.value}
-          className={styles.option}
-          selected={option.value === value}
-        >
+        <option key={option.value} value={option.value} className={styles.option}>
           {option.label}
         </option>
       ))}
