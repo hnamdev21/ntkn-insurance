@@ -1,4 +1,4 @@
-import { GiftIcon, HomeIcon, LayersIcon, UserIcon } from "@/components/Icons";
+import { HomeIcon, LayersIcon, UserIcon } from "@/components/Icons";
 
 export const path = {
   Home: "/home",
@@ -75,27 +75,8 @@ export type AdminPath = (typeof adminPath)[keyof typeof adminPath];
 export const adminRoute = {
   Admin: {
     path: adminPath.Admin,
-    label: "Admin",
-  },
-  Dashboard: {
-    path: adminPath.Dashboard,
     label: "Dashboard",
     icon: HomeIcon,
-  },
-  Products: {
-    path: adminPath.Products,
-    label: "Products",
-    icon: GiftIcon,
-  },
-  Users: {
-    path: adminPath.Users,
-    label: "Users",
-    icon: UserIcon,
-  },
-  News: {
-    path: adminPath.News,
-    label: "News",
-    icon: LayersIcon,
   },
   Policies: {
     path: adminPath.Policies,
@@ -105,6 +86,16 @@ export const adminRoute = {
   Claims: {
     path: adminPath.Claims,
     label: "Claims",
+    icon: LayersIcon,
+  },
+  Users: {
+    path: adminPath.Users,
+    label: "Users",
+    icon: UserIcon,
+  },
+  News: {
+    path: adminPath.News,
+    label: "News",
     icon: LayersIcon,
   },
   Loans: {
@@ -125,9 +116,7 @@ export const adminRoute = {
 } as const;
 export type AdminRoute = (typeof adminRoute)[keyof typeof adminRoute];
 
-export const adminRoutes = Object.values(adminRoute).filter(
-  (route) => route.path !== adminPath.Admin
-);
+export const adminRoutes = Object.values(adminRoute);
 
 export const socialPath = {
   Instagram: "/instagram",

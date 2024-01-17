@@ -1,6 +1,6 @@
-interface Props {
+export type Props = {
   className?: string;
-}
+};
 
 export const LogoIcon = ({ className = "" }: Props) => {
   return (
