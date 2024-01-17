@@ -4,4 +4,12 @@
   border-radius: 0;
   border: none;
   box-shadow: none;
+
+  .otpInput {
+    width: 75%;
+  }
+
+  .sendOtpBtn {
+    flex: 1;
+  }
 }
