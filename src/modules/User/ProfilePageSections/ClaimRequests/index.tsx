@@ -34,7 +34,8 @@ const TIMEOUT = 1000;
 const formValidator = yup.object().shape({
   contractId: yup.string().required("Please enter your contract number"),
   description: yup.string().required("Please enter your description"),
-  claimId: yup.string().required("Please select your claim type"),
+  policyId: yup.string().required("Please select your policy"),
+  claimId: yup.string().required("Please select your claim"),
   otp: yup.string().required("Please enter your OTP"),
 });
 
@@ -83,6 +84,11 @@ const ClaimRequests = () => {
           </div>
 
           <div className="flex-1">
+            <Label htmlFor="policyId">Policy</Label>
+            <Select id="policyId" {...register("policyId")} options={claimOptions} />
+          </div>
+
+          <div className="flex-1">
             <Label htmlFor="claimId">Claim</Label>
             <Select id="claimId" {...register("claimId")} options={claimOptions} />
           </div>
@@ -128,7 +134,7 @@ const ClaimRequests = () => {
 
       <div className="flex-1 pl-[4.8rem]">
         <Typography tag="h4" fontSize="fs-md" fontWeight="fw-md" className="mb-[1.6rem]">
-          Claim Requests Log
+          All your claim requests
         </Typography>
       </div>
     </div>
