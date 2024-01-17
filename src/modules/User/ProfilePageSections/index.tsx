@@ -14,11 +14,11 @@ const ProfileModule = () => {
 
   return (
     <Section>
-      <Container className="flex items-start gap-[12.4rem]">
+      <Container className="flex items-start gap-[8.4rem]">
         <Sidebar
           as="list"
           items={items}
-          className="w-1/6"
+          className="w-1/5"
           onChange={(item) => setActiveItem(item as unknown as StatusItem)}
           currentItem={activeItem}
         />
