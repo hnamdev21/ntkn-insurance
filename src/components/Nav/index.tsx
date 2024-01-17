@@ -22,7 +22,7 @@ type NavProps = React.HTMLAttributes<HTMLDivElement> & {
 
 function Nav({ col = false, items, showIcon = false, className = "", ...props }: NavProps) {
   const pathname = usePathname();
-  const classes = cn("flex gap-[1.8rem]", styles.nav, className, col && "flex-col gap-[0.0rem]");
+  const classes = cn("flex", col ? "flex-col gap-[0.0rem]" : "gap-[1.8rem]", styles.nav, className);
 
   return (
     <nav className={classes} {...props}>

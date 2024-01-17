@@ -2,6 +2,7 @@
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Spin } from "antd";
+import cn from "classnames";
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -56,52 +57,56 @@ const Profile = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <Form.Item>
-        <AvatarInput />
-      </Form.Item>
+    <div className="flex">
+      <Form onSubmit={handleSubmit(onSubmit)} className={cn("flex-1 pr-[4.8rem]", styles.form)}>
+        <Form.Item>
+          <AvatarInput />
+        </Form.Item>
 
-      <Form.Item className="flex gap-[2.4rem]">
-        <div className="flex-1">
-          <Label htmlFor="fullName" required>
-            Full name
-          </Label>
-          <Input
-            type="text"
-            id="fullName"
-            {...register("fullName")}
-            error={errors.fullName && true}
-          />
-          {errors.fullName && <MessageError>{errors.fullName.message}</MessageError>}
-        </div>
+        <Form.Item className="flex gap-[2.4rem]">
+          <div className="flex-1">
+            <Label htmlFor="fullName" required>
+              Full name
+            </Label>
+            <Input
+              type="text"
+              id="fullName"
+              {...register("fullName")}
+              error={errors.fullName && true}
+            />
+            {errors.fullName && <MessageError>{errors.fullName.message}</MessageError>}
+          </div>
 
-        <div className="flex-1">
-          <Label htmlFor="gender">Gender</Label>
-          <Select id="gender" {...register("gender")} options={genderOptions} />
-        </div>
+          <div className="flex-1">
+            <Label htmlFor="gender">Gender</Label>
+            <Select id="gender" {...register("gender")} options={genderOptions} />
+          </div>
 
-        <div className="flex-1">
-          <Label htmlFor="phoneNumber">Phone number</Label>
-          <Input
-            type="text"
-            id="phoneNumber"
-            {...register("phoneNumber")}
-            error={errors.phoneNumber && true}
-          />
-          {errors.phoneNumber && <MessageError>{errors.phoneNumber.message}</MessageError>}
-        </div>
-      </Form.Item>
+          <div className="flex-1">
+            <Label htmlFor="phoneNumber">Phone number</Label>
+            <Input
+              type="text"
+              id="phoneNumber"
+              {...register("phoneNumber")}
+              error={errors.phoneNumber && true}
+            />
+            {errors.phoneNumber && <MessageError>{errors.phoneNumber.message}</MessageError>}
+          </div>
+        </Form.Item>
 
-      <Form.Item>
-        <Label htmlFor="address">Address</Label>
-        <Input type="text" id="address" {...register("address")} error={errors.address && true} />
-        {errors.address && <MessageError>{errors.address.message}</MessageError>}
-      </Form.Item>
+        <Form.Item>
+          <Label htmlFor="address">Address</Label>
+          <Input type="text" id="address" {...register("address")} error={errors.address && true} />
+          {errors.address && <MessageError>{errors.address.message}</MessageError>}
+        </Form.Item>
 
-      <Button type="submit" btnWidth="auto">
-        {isSubmitting ? <Spin /> : "Save"}
-      </Button>
-    </Form>
+        <Button type="submit" btnWidth="auto">
+          {isSubmitting ? <Spin /> : "Save"}
+        </Button>
+      </Form>
+
+      <div className="flex-1 pl-[4.8rem]"></div>
+    </div>
   );
 };
 
