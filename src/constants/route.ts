@@ -68,7 +68,7 @@ export const headerRoutes = Object.values(route).filter(
 );
 
 export const adminPath = {
-  Admin: "/admin",
+  Admin: "/admin/dashboard",
   Users: "/admin/users",
   Blogs: "/admin/blogs",
   Policies: "/admin/policies",

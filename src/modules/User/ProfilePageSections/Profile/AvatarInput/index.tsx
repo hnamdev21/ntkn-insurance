@@ -1,6 +1,8 @@
 import Image from "next/image";
 import React from "react";
 
+import { CameraIcon } from "@/components/Icons";
+
 import styles from "./styles.module.scss";
 
 type AvatarInputProps = React.HTMLAttributes<HTMLInputElement> & {
@@ -41,9 +43,9 @@ const AvatarInputComponent = (
           height={400}
           className={`${styles.avatar}`}
         />
-        {/* <div className={`${styles.overlay}`}>
-          <CommonIcons.CameraIcon />
-        </div> */}
+        <div className={`${styles.overlay}`}>
+          <CameraIcon />
+        </div>
       </label>
       <input
         type="file"

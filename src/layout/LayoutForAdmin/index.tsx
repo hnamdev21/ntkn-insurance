@@ -21,7 +21,7 @@ const LayoutForAdmin = ({ children }: { children: React.ReactNode }) => {
             Welcome, Admin
           </Typography>
 
-          <Button btnVariant="secondary">Logout</Button>
+          <Button>Logout</Button>
         </div>
 
         {children}
