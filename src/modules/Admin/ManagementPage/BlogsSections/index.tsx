@@ -4,11 +4,40 @@ import { Pagination } from "antd";
 import React from "react";
 
 import Button from "@/components/Button";
+import Input from "@/components/Form/Input";
+import Select from "@/components/Form/Select";
 import Typography from "@/components/Typography";
 
 import styles from "./styles.module.scss";
-// GENERATE 20 MOCK DATA FOR BLOG
-// ID Title Author Category Tags Views Likes Comments Status
+
+const categoryOptions = [
+  { label: "All", value: "all" },
+  { label: "Category 1", value: "Category 1" },
+  { label: "Category 2", value: "Category 2" },
+  { label: "Category 3", value: "Category 3" },
+];
+
+const tagOptions = [
+  { label: "All", value: "all" },
+  { label: "Tag 1", value: "tag 1" },
+  { label: "Tag 2", value: "tag 2" },
+  { label: "Tag 3", value: "tag 3" },
+];
+
+const statusOptions = [
+  { label: "All", value: "all" },
+  { label: "Active", value: "active" },
+  { label: "Inactive", value: "inactive" },
+];
+
+const sortOptions = [
+  { label: "Default", value: "default" },
+  { label: "Newest", value: "newest" },
+  { label: "Oldest", value: "oldest" },
+  { label: "Views", value: "views" },
+  { label: "Likes", value: "Likes" },
+];
+
 const MOCK_DATA = [
   {
     id: 1,
@@ -42,6 +71,46 @@ const BlogManagementModule = () => {
 
   return (
     <div>
+      <div className="flex mb-[2.4rem] gap-[3.2rem]">
+        <div className="w-1/4">
+          <Input id="search" name="search" placeholder="Enter title or author" />
+        </div>
+
+        <div className="flex-1 flex gap-[3rem]">
+          <div className="w-1/4 flex gap-[1.2rem] items-center">
+            <Typography tag="p" fontWeight="fw-md">
+              Category
+            </Typography>
+
+            <Select id="category" name="category" options={categoryOptions} />
+          </div>
+
+          <div className="w-1/4 flex gap-[1.2rem] items-center">
+            <Typography tag="p" fontWeight="fw-md">
+              Tag
+            </Typography>
+
+            <Select id="tag" name="tag" options={tagOptions} />
+          </div>
+
+          <div className="w-1/4 flex gap-[1.2rem] items-center">
+            <Typography tag="p" fontWeight="fw-md">
+              Status
+            </Typography>
+
+            <Select id="status" name="status" options={statusOptions} />
+          </div>
+
+          <div className="w-1/4 flex gap-[1.2rem] items-center">
+            <Typography tag="p" fontWeight="fw-md">
+              Sort
+            </Typography>
+
+            <Select id="sort" name="sort" options={sortOptions} />
+          </div>
+        </div>
+      </div>
+
       <table className="w-full mb-[2.4rem]">
         <thead>
           <tr className={`flex w-full py-[0.6rem] ${styles.heading}`}>
@@ -166,7 +235,7 @@ const BlogManagementModule = () => {
 
               <td className={`w-1/6 px-[1rem] ${styles.col}`}>
                 <Typography tag="p" fontWeight="fw-md">
-                  <Button btnSize="sm" btnVariant="secondary" className="mr-[0.6rem]">
+                  <Button btnSize="sm" btnVariant="secondary" className="flex-1" btnWidth="full">
                     Edit
                   </Button>
                 </Typography>
