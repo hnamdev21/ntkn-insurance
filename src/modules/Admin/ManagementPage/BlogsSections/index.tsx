@@ -71,13 +71,24 @@ const BlogManagementModule = () => {
 
   return (
     <div>
+      <div className="mb-[.8rem]">
+        <Button
+          as="a"
+          href="/admin/blogs/create"
+          btnSize="sm"
+          btnVariant="tertiary"
+          underlineAnimation
+        >
+          Create new blog
+        </Button>
+      </div>
       <div className="flex mb-[2.4rem] gap-[3.2rem]">
         <div className="w-1/4">
           <Input id="search" name="search" placeholder="Enter title or author" />
         </div>
 
         <div className="flex-1 flex gap-[3rem]">
-          <div className="w-1/4 flex gap-[1.2rem] items-center">
+          <div className="flex gap-[1.2rem] items-center">
             <Typography tag="p" fontWeight="fw-md">
               Category
             </Typography>
@@ -85,7 +96,7 @@ const BlogManagementModule = () => {
             <Select id="category" name="category" options={categoryOptions} />
           </div>
 
-          <div className="w-1/4 flex gap-[1.2rem] items-center">
+          <div className="flex gap-[1.2rem] items-center">
             <Typography tag="p" fontWeight="fw-md">
               Tag
             </Typography>
@@ -93,7 +104,7 @@ const BlogManagementModule = () => {
             <Select id="tag" name="tag" options={tagOptions} />
           </div>
 
-          <div className="w-1/4 flex gap-[1.2rem] items-center">
+          <div className="flex gap-[1.2rem] items-center">
             <Typography tag="p" fontWeight="fw-md">
               Status
             </Typography>
@@ -101,7 +112,7 @@ const BlogManagementModule = () => {
             <Select id="status" name="status" options={statusOptions} />
           </div>
 
-          <div className="w-1/4 flex gap-[1.2rem] items-center">
+          <div className="flex gap-[1.2rem] items-center">
             <Typography tag="p" fontWeight="fw-md">
               Sort
             </Typography>
@@ -234,8 +245,8 @@ const BlogManagementModule = () => {
               </td>
 
               <td className={`w-1/6 px-[1rem] ${styles.col}`}>
-                <Typography tag="p" fontWeight="fw-md">
-                  <Button btnSize="sm" btnVariant="secondary" className="flex-1" btnWidth="full">
+                <Typography tag="p" fontWeight="fw-md" className="flex-1">
+                  <Button btnSize="sm" btnVariant="secondary" btnWidth="full">
                     Edit
                   </Button>
                 </Typography>

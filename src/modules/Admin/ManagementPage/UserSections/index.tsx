@@ -3,6 +3,7 @@
 import { Pagination } from "antd";
 import React from "react";
 
+import Button from "@/components/Button";
 import Input from "@/components/Form/Input";
 import Select from "@/components/Form/Select";
 import Typography from "@/components/Typography";
@@ -52,13 +53,25 @@ const UserManagementModule = () => {
 
   return (
     <div>
+      <div className="mb-[.8rem]">
+        <Button
+          as="a"
+          href="/admin/blogs/create"
+          btnSize="sm"
+          btnVariant="tertiary"
+          underlineAnimation
+        >
+          Create account for employee
+        </Button>
+      </div>
+
       <div className="flex mb-[2.4rem] gap-[3.2rem]">
         <div className="w-1/3">
           <Input id="search" name="search" placeholder="Enter name, email, ..." />
         </div>
 
         <div className="flex-1 flex gap-[3rem]">
-          <div className="w-1/3 flex gap-[1.2rem] items-center">
+          <div className="flex gap-[1.2rem] items-center">
             <Typography tag="p" fontWeight="fw-md">
               Role
             </Typography>
@@ -66,7 +79,7 @@ const UserManagementModule = () => {
             <Select id="tag" name="tag" options={roleOptions} />
           </div>
 
-          <div className="w-1/3 flex gap-[1.2rem] items-center">
+          <div className="flex gap-[1.2rem] items-center">
             <Typography tag="p" fontWeight="fw-md">
               Status
             </Typography>
@@ -74,7 +87,7 @@ const UserManagementModule = () => {
             <Select id="status" name="status" options={statusOptions} />
           </div>
 
-          <div className="w-1/3 flex gap-[1.2rem] items-center">
+          <div className="flex gap-[1.2rem] items-center">
             <Typography tag="p" fontWeight="fw-md">
               Sort
             </Typography>
