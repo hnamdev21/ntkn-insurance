@@ -3,6 +3,8 @@
 import { Pagination } from "antd";
 import React from "react";
 
+import Input from "@/components/Form/Input";
+import Select from "@/components/Form/Select";
 import Typography from "@/components/Typography";
 
 import styles from "./styles.module.scss";
@@ -24,6 +26,24 @@ const MOCK_DATA = [
   })),
 ];
 
+const roleOptions = [
+  { label: "All", value: "all" },
+  { label: "Admin", value: "admin" },
+  { label: "User", value: "user" },
+];
+
+const statusOptions = [
+  { label: "All", value: "all" },
+  { label: "Active", value: "active" },
+  { label: "Inactive", value: "inactive" },
+];
+
+const sortOptions = [
+  { label: "Default", value: "default" },
+  { label: "Newest", value: "newest" },
+  { label: "Oldest", value: "oldest" },
+];
+
 const UserManagementModule = () => {
   const onPageChange = (page: number, pageSize: number) => {
     page;
@@ -32,6 +52,38 @@ const UserManagementModule = () => {
 
   return (
     <div>
+      <div className="flex mb-[2.4rem] gap-[3.2rem]">
+        <div className="w-1/3">
+          <Input id="search" name="search" placeholder="Enter name, email, ..." />
+        </div>
+
+        <div className="flex-1 flex gap-[3rem]">
+          <div className="w-1/3 flex gap-[1.2rem] items-center">
+            <Typography tag="p" fontWeight="fw-md">
+              Role
+            </Typography>
+
+            <Select id="tag" name="tag" options={roleOptions} />
+          </div>
+
+          <div className="w-1/3 flex gap-[1.2rem] items-center">
+            <Typography tag="p" fontWeight="fw-md">
+              Status
+            </Typography>
+
+            <Select id="status" name="status" options={statusOptions} />
+          </div>
+
+          <div className="w-1/3 flex gap-[1.2rem] items-center">
+            <Typography tag="p" fontWeight="fw-md">
+              Sort
+            </Typography>
+
+            <Select id="sort" name="sort" options={sortOptions} />
+          </div>
+        </div>
+      </div>
+
       <table className="w-full mb-[2.4rem]">
         <thead>
           <tr className={`flex w-full py-[0.6rem] ${styles.heading}`}>
