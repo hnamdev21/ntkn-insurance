@@ -10,7 +10,7 @@ import {
 } from "@/components/Icons";
 
 export const path = {
-  Home: "/home",
+  Home: "/",
   Policies: "/policies",
   Claims: "/claims",
   Loans: "/loans",

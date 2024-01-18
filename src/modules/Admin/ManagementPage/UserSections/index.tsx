@@ -1,3 +1,6 @@
+"use client";
+
+import { Pagination } from "antd";
 import React from "react";
 
 import Typography from "@/components/Typography";
@@ -22,52 +25,59 @@ const MOCK_DATA = [
 ];
 
 const UserManagementModule = () => {
+  const onPageChange = (page: number, pageSize: number) => {
+    page;
+    pageSize;
+  };
+
   return (
     <div>
-      <table className="w-full">
-        <th className={`flex w-full py-[0.6rem] ${styles.heading}`}>
-          <td className="w-1/12 px-[1rem]">
-            <Typography tag="h5" fontWeight="fw-md">
-              No.
-            </Typography>
-          </td>
+      <table className="w-full mb-[2.4rem]">
+        <thead>
+          <tr className={`flex w-full py-[0.6rem] ${styles.heading}`}>
+            <th className="w-1/12 px-[1rem]">
+              <Typography tag="h5" fontWeight="fw-md">
+                ID
+              </Typography>
+            </th>
 
-          <td className="w-1/3 px-[1rem]">
-            <Typography tag="h5" fontWeight="fw-md">
-              Full name
-            </Typography>
-          </td>
+            <th className="w-1/3 px-[1rem]">
+              <Typography tag="h5" fontWeight="fw-md">
+                Full name
+              </Typography>
+            </th>
 
-          <td className="w-1/3 px-[1rem]">
-            <Typography tag="h5" fontWeight="fw-md">
-              Email
-            </Typography>
-          </td>
+            <th className="w-1/3 px-[1rem]">
+              <Typography tag="h5" fontWeight="fw-md">
+                Email
+              </Typography>
+            </th>
 
-          <td className="w-1/2 px-[1rem]">
-            <Typography tag="h5" fontWeight="fw-md">
-              Address
-            </Typography>
-          </td>
+            <th className="w-1/2 px-[1rem]">
+              <Typography tag="h5" fontWeight="fw-md">
+                Address
+              </Typography>
+            </th>
 
-          <td className="w-1/3 px-[1rem]">
-            <Typography tag="h5" fontWeight="fw-md">
-              Phone number
-            </Typography>
-          </td>
+            <th className="w-1/3 px-[1rem]">
+              <Typography tag="h5" fontWeight="fw-md">
+                Phone number
+              </Typography>
+            </th>
 
-          <td className="w-1/6 px-[1rem]">
-            <Typography tag="h5" fontWeight="fw-md">
-              Role
-            </Typography>
-          </td>
+            <th className="w-1/6 px-[1rem]">
+              <Typography tag="h5" fontWeight="fw-md">
+                Role
+              </Typography>
+            </th>
 
-          <td className="w-1/12 px-[1rem]">
-            <Typography tag="h5" fontWeight="fw-md">
-              Status
-            </Typography>
-          </td>
-        </th>
+            <th className="w-1/12 px-[1rem]">
+              <Typography tag="h5" fontWeight="fw-md">
+                Status
+              </Typography>
+            </th>
+          </tr>
+        </thead>
 
         <tbody>
           {MOCK_DATA.map((user) => (
@@ -117,6 +127,16 @@ const UserManagementModule = () => {
           ))}
         </tbody>
       </table>
+
+      <div className="w-full flex justify-center">
+        <Pagination
+          defaultCurrent={1}
+          hideOnSinglePage
+          pageSize={20}
+          total={40}
+          onChange={onPageChange}
+        />
+      </div>
     </div>
   );
 };
