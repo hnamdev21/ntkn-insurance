@@ -1,21 +1,25 @@
+"use client";
+
 import cn from "classnames";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
+import { Props } from "../Icons";
 import styles from "./styles.module.scss";
 
 export type StatusItem = {
   label: string;
   value: string;
-} & { as?: "list" };
+};
 
 export type NavItem = {
   label: string;
-  href: string;
-  icon?: (props: React.SVGProps<SVGSVGElement>) => React.ReactElement;
-} & { as: "nav" };
+  path: string;
+  icon?: (props: Props) => React.JSX.Element;
+};
 
-type StatusSidebar = {
+type StatusSidebar = React.HTMLAttributes<HTMLDivElement> & {
   as?: "list";
   items: StatusItem[];
   defaultItem?: StatusItem;
@@ -23,58 +27,59 @@ type StatusSidebar = {
   onChange: (item: StatusItem) => void;
 };
 
-type NavSidebar = {
+type NavSidebar = React.HTMLAttributes<HTMLDivElement> & {
   as: "nav";
   items: NavItem[];
-  defaultItem?: NavItem;
 };
 
-type SidebarProps = React.HTMLAttributes<HTMLDivElement> & (StatusSidebar | NavSidebar);
+type SidebarProps = StatusSidebar | NavSidebar;
 
 const Sidebar = ({ className, ...props }: SidebarProps) => {
-  const defaultItem = props.defaultItem ?? props.items[0];
-
   const classes = cn(styles.sidebar, className);
+  const pathname = usePathname();
 
-  return (
-    <div className={classes}>
-      {props.as === "list" && (
+  if (!props.items.length) return null;
+
+  if (props.as === "nav") {
+    return (
+      <div className={classes}>
         <ul>
           {props.items.map((item) => (
             <li
-              key={item.value}
-              className={cn(
-                styles.item,
-                item.value === (props.currentItem || (defaultItem as StatusItem)).value
-                  ? styles.active
-                  : ""
-              )}
-              onClick={() => props.onChange(item)}
+              key={item.path}
+              className={cn(styles.item, pathname.includes(item.path) ? styles.active : "")}
             >
-              {item.label}
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {props.as === "nav" && (
-        <ul>
-          {props.items.map((item) => (
-            <li
-              key={item.href}
-              className={cn(
-                styles.item,
-                item.href === (defaultItem as NavItem)?.href ? styles.active : ""
-              )}
-            >
-              <Link href={item.href}>
+              <Link href={item.path} className="flex items-center gap-[1.2rem]">
                 {item.icon && <div className={styles.icon}>{item.icon({})}</div>}
                 {item.label}
               </Link>
             </li>
           ))}
         </ul>
-      )}
+      </div>
+    );
+  }
+
+  const defaultItem = props.defaultItem ?? props.items[0];
+
+  return (
+    <div className={classes}>
+      <ul>
+        {props.items.map((item) => (
+          <li
+            key={item.value}
+            className={cn(
+              styles.item,
+              item.value === (props.currentItem || (defaultItem as StatusItem)).value
+                ? styles.active
+                : ""
+            )}
+            onClick={() => props.onChange(item)}
+          >
+            {item.label}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

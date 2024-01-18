@@ -99,7 +99,7 @@ const LoginPage = () => {
       <Divider>Or</Divider>
 
       <Form.Item>
-        <Button type="button" btnWidth="full" onClick={loginWithGoogle}>
+        <Button type="button" btnWidth="full" btnVariant="secondary" onClick={loginWithGoogle}>
           Login with Google
         </Button>
       </Form.Item>

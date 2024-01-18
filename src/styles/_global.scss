@@ -12,3 +12,24 @@ body {
 svg {
   fill: var(--color-primary);
 }
+
+// OVERWRITE ANTD STYLES
+:where(.css-dev-only-do-not-override-dkbvqv).ant-pagination .ant-pagination-item-active {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    opacity: 0.8;
+  }
+
+  a {
+    color: var(--color-white);
+
+    &:hover {
+      color: var(--color-white);
+    }
+  }
+}
