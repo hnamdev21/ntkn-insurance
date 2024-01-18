@@ -13,6 +13,18 @@
     width: auto;
   }
 
+  &.lg {
+    padding: rem(12px) rem(24px);
+  }
+
+  &.md {
+    padding: rem(8px) rem(22px);
+  }
+
+  &.sm {
+    padding: rem(2px) rem(4px);
+  }
+
   // Variant
   &.primary {
     background-color: var(--color-primary);
@@ -31,6 +43,15 @@
     &:hover {
       // background-color: var(--color-tint-t5);
       box-shadow: inset 0 0 0 rem(1px) var(--color-primary);
+    }
+  }
+
+  &.danger {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+
+    &:hover {
+      opacity: 0.8;
     }
   }
 

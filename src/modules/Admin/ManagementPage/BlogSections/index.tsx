@@ -3,28 +3,38 @@
 import { Pagination } from "antd";
 import React from "react";
 
+import Button from "@/components/Button";
 import Typography from "@/components/Typography";
 
 import styles from "./styles.module.scss";
-
-// GENERATE 10 MOCK DATA
-const TOTAL_MOCK_DATA = 10;
-const MAX_ADMIN = 2;
-const NUMBER_MAKE_ID_TO_STRING = 65;
-
+// GENERATE 20 MOCK DATA FOR BLOG
+// ID Title Author Category Tags Views Likes Comments Status
 const MOCK_DATA = [
-  ...[...Array(TOTAL_MOCK_DATA)].map((_, index) => ({
-    id: index,
-    name: `Nguyen Van ${String.fromCharCode(NUMBER_MAKE_ID_TO_STRING + index)}`,
-    email: `${String.fromCharCode(NUMBER_MAKE_ID_TO_STRING + index)}@gmail.com`,
-    address: "Hanoi",
-    phone: "0123456789",
-    role: index < MAX_ADMIN ? "Admin" : "User",
+  {
+    id: 1,
+    title: "Blog 1",
+    author: "Nguyen Van A",
+    category: "Category 1",
+    tags: "Tag 1, Tag 2",
+    views: 100,
+    likes: 100,
+    comments: 100,
     status: "Active",
-  })),
+  },
+  {
+    id: 2,
+    title: "Blog 2",
+    author: "Nguyen Van B",
+    category: "Category 2",
+    tags: "Tag 1, Tag 2",
+    views: 100,
+    likes: 100,
+    comments: 100,
+    status: "Active",
+  },
 ];
 
-const UserManagementModule = () => {
+const BlogManagementModule = () => {
   const onPageChange = (page: number, pageSize: number) => {
     page;
     pageSize;
@@ -43,84 +53,122 @@ const UserManagementModule = () => {
 
             <th className="w-1/3 px-[1rem]">
               <Typography tag="h5" fontWeight="fw-md">
-                Full name
+                Title
               </Typography>
             </th>
 
-            <th className="w-1/3 px-[1rem]">
+            <th className="w-1/4 px-[1rem]">
               <Typography tag="h5" fontWeight="fw-md">
-                Email
-              </Typography>
-            </th>
-
-            <th className="w-1/2 px-[1rem]">
-              <Typography tag="h5" fontWeight="fw-md">
-                Address
-              </Typography>
-            </th>
-
-            <th className="w-1/3 px-[1rem]">
-              <Typography tag="h5" fontWeight="fw-md">
-                Phone number
+                Author
               </Typography>
             </th>
 
             <th className="w-1/6 px-[1rem]">
               <Typography tag="h5" fontWeight="fw-md">
-                Role
+                Category
               </Typography>
             </th>
 
-            <th className="w-1/12 px-[1rem]">
+            <th className="w-1/3 px-[1rem]">
+              <Typography tag="h5" fontWeight="fw-md">
+                Tags
+              </Typography>
+            </th>
+
+            <th className="w-1/6 px-[1rem]">
+              <Typography tag="h5" fontWeight="fw-md">
+                Views
+              </Typography>
+            </th>
+
+            <th className="w-1/6 px-[1rem]">
+              <Typography tag="h5" fontWeight="fw-md">
+                Likes
+              </Typography>
+            </th>
+
+            <th className="w-1/6 px-[1rem]">
+              <Typography tag="h5" fontWeight="fw-md">
+                Comments
+              </Typography>
+            </th>
+
+            <th className="w-1/6 px-[1rem]">
               <Typography tag="h5" fontWeight="fw-md">
                 Status
+              </Typography>
+            </th>
+
+            <th className="w-1/6 px-[1rem]">
+              <Typography tag="h5" fontWeight="fw-md">
+                Action
               </Typography>
             </th>
           </tr>
         </thead>
 
         <tbody>
-          {MOCK_DATA.map((user) => (
-            <tr key={user.id} className={`flex w-full py-[0.6rem] ${styles.row}`}>
+          {MOCK_DATA.map((blog) => (
+            <tr key={blog.id} className={`flex w-full py-[0.6rem] ${styles.row}`}>
               <td className={`w-1/12 px-[1rem] ${styles.col}`}>
                 <Typography tag="p" fontWeight="fw-md">
-                  {user.id}
+                  {blog.id}
                 </Typography>
               </td>
 
               <td className={`w-1/3 px-[1rem] ${styles.col}`}>
                 <Typography tag="p" fontWeight="fw-md">
-                  {user.name}
+                  {blog.title}
                 </Typography>
               </td>
 
-              <td className={`w-1/3 px-[1rem] ${styles.col}`}>
+              <td className={`w-1/4 px-[1rem] ${styles.col}`}>
                 <Typography tag="p" fontWeight="fw-md">
-                  {user.email}
-                </Typography>
-              </td>
-
-              <td className={`w-1/2 px-[1rem] ${styles.col}`}>
-                <Typography tag="p" fontWeight="fw-md">
-                  {user.address}
-                </Typography>
-              </td>
-
-              <td className={`w-1/3 px-[1rem] ${styles.col}`}>
-                <Typography tag="p" fontWeight="fw-md">
-                  {user.phone}
+                  {blog.author}
                 </Typography>
               </td>
 
               <td className={`w-1/6 px-[1rem] ${styles.col}`}>
                 <Typography tag="p" fontWeight="fw-md">
-                  {user.role}
+                  {blog.category}
                 </Typography>
               </td>
 
-              <td className={`w-1/12 px-[1rem] ${styles.col}`}>
+              <td className={`w-1/3 px-[1rem] ${styles.col}`}>
                 <Typography tag="p" fontWeight="fw-md">
-                  {user.status}
+                  {blog.tags}
+                </Typography>
+              </td>
+
+              <td className={`w-1/6 px-[1rem] ${styles.col}`}>
+                <Typography tag="p" fontWeight="fw-md">
+                  {blog.views}
+                </Typography>
+              </td>
+
+              <td className={`w-1/6 px-[1rem] ${styles.col}`}>
+                <Typography tag="p" fontWeight="fw-md">
+                  {blog.likes}
+                </Typography>
+              </td>
+
+              <td className={`w-1/6 px-[1rem] ${styles.col}`}>
+                <Typography tag="p" fontWeight="fw-md">
+                  {blog.comments}
+                </Typography>
+              </td>
+
+              <td className={`w-1/6 px-[1rem] ${styles.col}`}>
+                <Typography tag="p" fontWeight="fw-md">
+                  {blog.status}
+                </Typography>
+              </td>
+
+              <td className={`w-1/6 px-[1rem] ${styles.col}`}>
+                <Typography tag="p" fontWeight="fw-md">
+                  <Button btnSize="sm" btnVariant="secondary" className="mr-[0.6rem]">
+                    Edit
+                  </Button>
                 </Typography>
               </td>
             </tr>
@@ -141,4 +189,4 @@ const UserManagementModule = () => {
   );
 };
 
-export default UserManagementModule;
+export default BlogManagementModule;

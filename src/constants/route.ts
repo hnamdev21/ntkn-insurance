@@ -1,11 +1,20 @@
-import { GiftIcon, HomeIcon, LayersIcon, UserIcon } from "@/components/Icons";
+import {
+  BookIcon,
+  BookOpenIcon,
+  ChartIcon,
+  CreditCardIcon,
+  HandHoldingHeart,
+  LayersIcon,
+  MoneyIcon,
+  UserIcon,
+} from "@/components/Icons";
 
 export const path = {
-  Home: "/home",
+  Home: "/",
   Policies: "/policies",
   Claims: "/claims",
   Loans: "/loans",
-  News: "/news",
+  Blogs: "/news",
   About: "/about",
   Contact: "/contact",
   FAQs: "/faqs",
@@ -35,9 +44,9 @@ export const route = {
     path: path.Contact,
     label: "Contact",
   },
-  News: {
-    path: path.News,
-    label: "News",
+  Blogs: {
+    path: path.Blogs,
+    label: "Blogs",
   },
   FAQs: {
     path: path.FAQs,
@@ -59,11 +68,9 @@ export const headerRoutes = Object.values(route).filter(
 );
 
 export const adminPath = {
-  Admin: "/admin",
-  Dashboard: "/admin/dashboard",
-  Products: "/admin/products",
+  Admin: "/admin/dashboard",
   Users: "/admin/users",
-  News: "/admin/news",
+  Blogs: "/admin/blogs",
   Policies: "/admin/policies",
   Claims: "/admin/claims",
   Loans: "/admin/loans",
@@ -75,27 +82,8 @@ export type AdminPath = (typeof adminPath)[keyof typeof adminPath];
 export const adminRoute = {
   Admin: {
     path: adminPath.Admin,
-    label: "Admin",
-  },
-  Dashboard: {
-    path: adminPath.Dashboard,
     label: "Dashboard",
-    icon: HomeIcon,
-  },
-  Products: {
-    path: adminPath.Products,
-    label: "Products",
-    icon: GiftIcon,
-  },
-  Users: {
-    path: adminPath.Users,
-    label: "Users",
-    icon: UserIcon,
-  },
-  News: {
-    path: adminPath.News,
-    label: "News",
-    icon: LayersIcon,
+    icon: ChartIcon,
   },
   Policies: {
     path: adminPath.Policies,
@@ -105,29 +93,37 @@ export const adminRoute = {
   Claims: {
     path: adminPath.Claims,
     label: "Claims",
-    icon: LayersIcon,
+    icon: HandHoldingHeart,
+  },
+  Users: {
+    path: adminPath.Users,
+    label: "Users",
+    icon: UserIcon,
+  },
+  Blogs: {
+    path: adminPath.Blogs,
+    label: "Blogs",
+    icon: BookOpenIcon,
   },
   Loans: {
     path: adminPath.Loans,
     label: "Loans",
-    icon: LayersIcon,
+    icon: CreditCardIcon,
   },
   Payments: {
     path: adminPath.Payments,
     label: "Payments",
-    icon: LayersIcon,
+    icon: MoneyIcon,
   },
   Logs: {
     path: adminPath.Logs,
     label: "Logs",
-    icon: LayersIcon,
+    icon: BookIcon,
   },
 } as const;
 export type AdminRoute = (typeof adminRoute)[keyof typeof adminRoute];
 
-export const adminRoutes = Object.values(adminRoute).filter(
-  (route) => route.path !== adminPath.Admin
-);
+export const adminRoutes = Object.values(adminRoute);
 
 export const socialPath = {
   Instagram: "/instagram",
