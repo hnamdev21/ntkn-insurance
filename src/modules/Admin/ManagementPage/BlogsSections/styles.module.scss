@@ -11,6 +11,9 @@
   }
 
   .col {
+    display: flex;
+    align-items: center;
+
     &:not(:last-child) {
       border-right: rem(1px) solid var(--color-tint-t2);
     }
