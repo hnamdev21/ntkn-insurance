@@ -1,3 +1,13 @@
+.form {
+  display: flex;
+  align-items: flex-end;
+  gap: rem(16px);
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+
 .heading {
   background-color: var(--color-tint-t1);
   border-radius: rem(8px) rem(8px) 0 0;
