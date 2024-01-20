@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Spin } from "antd";
+import { Modal, Spin, Upload, UploadFile, UploadProps } from "antd";
 import cn from "classnames";
+import Image from "next/image";
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -12,6 +13,7 @@ import Label from "@/components/Form/Label";
 import MessageError from "@/components/Form/MessageError";
 import Select from "@/components/Form/Select";
 import Typography from "@/components/Typography";
+import getBase64 from "@/utils/getBase64";
 
 import styles from "./styles.module.scss";
 
@@ -39,12 +41,24 @@ const formValidator = yup.object().shape({
   otp: yup.string().required("Please enter your OTP"),
 });
 
+const UploadButton = () => (
+  <button style={{ border: 0, background: "none" }} type="button">
+    <div style={{ marginTop: 8 }}>Upload</div>
+  </button>
+);
+const indexOfTitleImage = 1;
+
 const ClaimRequests = () => {
   // prettier-ignore
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm({
     resolver: yupResolver(formValidator),
     mode: "onBlur",
   });
+
+  const [previewOpen, setPreviewOpen] = React.useState(false);
+  const [previewImage, setPreviewImage] = React.useState("");
+  const [previewTitle, setPreviewTitle] = React.useState("");
+  const [fileList, setFileList] = React.useState<UploadFile[]>([]);
 
   const onSubmit = async (data: FieldValues) => {
     // Fake API call
@@ -61,6 +75,23 @@ const ClaimRequests = () => {
       setTimeout(resolve, TIMEOUT);
     });
   };
+
+  const handleCancel = () => setPreviewOpen(false);
+
+  const handlePreview = async (file: UploadFile) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj as File);
+    }
+
+    setPreviewImage(file.url || (file.preview as string));
+    setPreviewOpen(true);
+    setPreviewTitle(
+      file.name || file.url!.substring(file.url!.lastIndexOf("/") + indexOfTitleImage)
+    );
+  };
+
+  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
+    setFileList(newFileList);
 
   return (
     <div className="flex">
@@ -105,6 +136,21 @@ const ClaimRequests = () => {
             error={errors.description && true}
           />
           {errors.description && <MessageError>{errors.description.message}</MessageError>}
+        </Form.Item>
+
+        <Form.Item>
+          <Upload
+            action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+            listType="picture-card"
+            fileList={fileList}
+            onPreview={handlePreview}
+            onChange={handleChange}
+          >
+            <UploadButton />
+          </Upload>
+          <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
+            <Image alt="Image to request claim" style={{ width: "100%" }} src={previewImage} />
+          </Modal>
         </Form.Item>
 
         <Form.Item>

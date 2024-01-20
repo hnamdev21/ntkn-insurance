@@ -10,19 +10,17 @@ import styles from "./styles.module.scss";
 const MedicalInsuranceModule = () => {
   return (
     <>
-      <Section></Section>
-
       <Section>
         <Container className="px-[42rem]">
           <Typography tag="h3" fontSize="fs-md" fontWeight="fw-bold" className="mb-[2.4rem]">
             Welcome to NTKN, where we are committed to offering you exceptional health insurance
-            solutions. Health insurance is not just a policy; it&apos;s your safety net, ensuring
+            solutions. Medical insurance is not just a policy; it&apos;s your safety net, ensuring
             you have access to quality healthcare without financial stress. At NTKN, we prioritize
             your well-being and peace of mind.
           </Typography>
 
           <Typography tag="h4" fontWeight="fw-bold" className="mb-[1.2rem]">
-            Why Choose Our Health Insurance:
+            Why Choose Our Medical Insurance:
           </Typography>
 
           <ul className="w-full flex flex-col gap-[.4rem] mb-[2.4rem]">
