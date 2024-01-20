@@ -10,8 +10,6 @@ import styles from "./styles.module.scss";
 const LifeInsuranceModule = () => {
   return (
     <>
-      <Section></Section>
-
       <Section>
         <Container className="px-[42rem]">
           <Typography tag="h3" fontSize="fs-md" fontWeight="fw-bold" className="mb-[2.4rem]">
