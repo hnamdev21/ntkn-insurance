@@ -1,7 +1,9 @@
 import React from "react";
 
+import MedicalInsuranceModule from "@/modules/User/PoliciesPageSections/MedicalInsuranceSections";
+
 const MedicalInsurancePage = () => {
-  return <div>MedicalInsurancePage</div>;
+  return <MedicalInsuranceModule />;
 };
 
 export default MedicalInsurancePage;

@@ -1,7 +1,9 @@
 import React from "react";
 
+import CarInsuranceModule from "@/modules/User/PoliciesPageSections/CarInsuranceSections";
+
 const CarInsurancePage = () => {
-  return <div>CarInsurancePage</div>;
+  return <CarInsuranceModule />;
 };
 
 export default CarInsurancePage;
