@@ -1,10 +1,15 @@
 "use client";
 
-import { Pagination } from "antd";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Pagination, Spin } from "antd";
 import React from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import * as yup from "yup";
 
 import Button from "@/components/Button";
+import Form from "@/components/Form";
 import Input from "@/components/Form/Input";
+import Label from "@/components/Form/Label";
 import Select from "@/components/Form/Select";
 import Typography from "@/components/Typography";
 
@@ -45,7 +50,29 @@ const sortOptions = [
   { label: "Oldest", value: "oldest" },
 ];
 
+const TIMEOUT = 1000;
+const formValidator = yup.object().shape({
+  fullName: yup.string().required("Please enter employee full name"),
+  username: yup.string().required("Please enter employee username"),
+  email: yup.string().required("Please enter employee email").email("Please enter a valid email"),
+});
+
 const UserManagementModule = () => {
+  // prettier-ignore
+  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm({
+    resolver: yupResolver(formValidator),
+    mode: "onBlur",
+  });
+
+  const onSubmit = async (data: FieldValues) => {
+    // Fake API call
+    await new Promise((resolve) => {
+      setTimeout(resolve, TIMEOUT);
+    });
+
+    return data;
+  };
+
   const onPageChange = (page: number, pageSize: number) => {
     page;
     pageSize;
@@ -54,15 +81,38 @@ const UserManagementModule = () => {
   return (
     <div>
       <div className="mb-[.8rem]">
-        <Button
-          as="a"
-          href="/admin/blogs/create"
-          btnSize="sm"
-          btnVariant="tertiary"
-          underlineAnimation
-        >
-          Create account for employee
-        </Button>
+        <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+          <Form.Item>
+            <Label htmlFor="fullName">Full name</Label>
+            <Input
+              type="text"
+              id="fullName"
+              {...register("fullName")}
+              error={errors.fullName && true}
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Label htmlFor="username">Username</Label>
+            <Input
+              type="text"
+              id="username"
+              {...register("username")}
+              error={errors.username && true}
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Label htmlFor="email">Email</Label>
+            <Input type="text" id="email" {...register("email")} error={errors.email && true} />
+          </Form.Item>
+
+          <Form.Item className="mb-0">
+            <Button type="submit" btnWidth="full">
+              {isSubmitting ? <Spin /> : "Create"}
+            </Button>
+          </Form.Item>
+        </Form>
       </div>
 
       <div className="flex mb-[2.4rem] gap-[3.2rem]">
