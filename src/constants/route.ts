@@ -12,6 +12,10 @@ import {
 export const path = {
   Home: "/",
   Policies: "/policies",
+  HomeInsurance: "/policies/home-insurance",
+  MotorInsurance: "/policies/motor-insurance",
+  LifeInsurance: "/policies/life-insurance",
+  MedicalInsurance: "/policies/medical-insurance",
   Claims: "/claims",
   Loans: "/loans",
   Blogs: "/news",
@@ -27,14 +31,6 @@ export const route = {
   Policies: {
     path: path.Policies,
     label: "Policies",
-  },
-  Claims: {
-    path: path.Claims,
-    label: "Claims",
-  },
-  Loans: {
-    path: path.Loans,
-    label: "Loans",
   },
   About: {
     path: path.About,

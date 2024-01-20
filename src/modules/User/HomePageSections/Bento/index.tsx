@@ -4,6 +4,7 @@ import React from "react";
 
 import Container from "@/components/Container";
 import Section from "@/components/Section";
+import { path } from "@/constants/route";
 
 import styles from "./styles.module.scss";
 
@@ -13,7 +14,7 @@ const BentoSection = () => {
       <Container className="flex flex-col md:gap-[1.8rem]">
         <div className="overflow-hidden flex gap-[1.8rem] md:h-[44rem] w-full">
           <div className={`overflow-hidden md:rounded-3xl md:w-2/3 ${styles.card}`}>
-            <Link href="/policies/home-insurance">
+            <Link href={path.HomeInsurance}>
               <Image
                 src="/images/social-insurance/house.png"
                 alt="Banner"
@@ -25,7 +26,7 @@ const BentoSection = () => {
             </Link>
           </div>
           <div className={`overflow-hidden md:rounded-3xl md:w-1/3 ${styles.card}`}>
-            <Link href="/policies/life-insurance">
+            <Link href={path.LifeInsurance}>
               <Image
                 src="/images/social-insurance/older-adult.jpg"
                 alt="Banner"
@@ -40,7 +41,7 @@ const BentoSection = () => {
 
         <div className="overflow-hidden flex gap-[1.8rem] md:h-[44rem] w-full">
           <div className={`overflow-hidden md:rounded-3xl md:w-1/3 ${styles.card}`}>
-            <Link href="/policies/heath-insurance">
+            <Link href={path.MedicalInsurance}>
               <Image
                 src="/images/social-insurance/nurse.webp"
                 alt="Banner"
@@ -52,7 +53,7 @@ const BentoSection = () => {
             </Link>
           </div>
           <div className={`overflow-hidden md:rounded-3xl md:w-2/3 ${styles.card}`}>
-            <Link href="/policies/motor-insurance">
+            <Link href={path.MotorInsurance}>
               <Image
                 src="/images/social-insurance/car.webp"
                 alt="Banner"

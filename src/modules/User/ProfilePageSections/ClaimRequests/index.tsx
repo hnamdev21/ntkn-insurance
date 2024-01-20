@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Modal, Spin, Upload, UploadFile, UploadProps } from "antd";
 import cn from "classnames";
+import Image from "next/image";
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -148,7 +149,7 @@ const ClaimRequests = () => {
             <UploadButton />
           </Upload>
           <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
-            <img alt="example" style={{ width: "100%" }} src={previewImage} />
+            <Image alt="Image to request claim" style={{ width: "100%" }} src={previewImage} />
           </Modal>
         </Form.Item>
 
