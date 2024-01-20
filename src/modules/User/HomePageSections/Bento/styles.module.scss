@@ -1,0 +1,12 @@
+.card {
+  .image {
+    transform: scale(1);
+    transition: all 0.4s linear;
+  }
+
+  &:hover {
+    .image {
+      transform: scale(1.1);
+    }
+  }
+}

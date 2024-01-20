@@ -1,4 +1,4 @@
-export const houseInsuranceData = [
+export const homeInsuranceData = [
   {
     id: 1,
     coverage: "Dwelling Coverage",

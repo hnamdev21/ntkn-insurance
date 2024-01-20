@@ -1,4 +1,4 @@
-export const carInsuranceData = [
+export const motorInsuranceData = [
   {
     id: 1,
     coverage: "Liability Coverage",
@@ -39,6 +39,6 @@ export const carInsuranceData = [
     coverage: "Rental Reimbursement",
     insuranceAmount: "8.000 USD",
     details:
-      "Rental Reimbursement coverage helps cover the cost of a rental car if your vehicle is being repaired due to a covered loss. The insurance amount depends on your policy and the daily limit you choose.",
+      "Rental Reimbursement coverage helps cover the cost of a rental motor if your vehicle is being repaired due to a covered loss. The insurance amount depends on your policy and the daily limit you choose.",
   },
 ];

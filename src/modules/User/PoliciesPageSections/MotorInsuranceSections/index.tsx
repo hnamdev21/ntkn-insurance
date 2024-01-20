@@ -4,10 +4,10 @@ import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Typography from "@/components/Typography";
 
-import { houseInsuranceData } from "./data";
+import { motorInsuranceData } from "./data";
 import styles from "./styles.module.scss";
 
-const HouseInsuranceModule = () => {
+const MotorInsuranceModule = () => {
   return (
     <>
       <Section></Section>
@@ -15,76 +15,75 @@ const HouseInsuranceModule = () => {
       <Section>
         <Container className="px-[42rem]">
           <Typography tag="h3" fontSize="fs-md" fontWeight="fw-bold" className="mb-[2.4rem]">
-            Welcome to NTKN, where we take pride in offering you comprehensive home insurance
-            solutions. Home insurance is more than just a policy; it&apos;s your safeguard against
-            unexpected events that could impact your home. At NTKN, we understand the importance of
-            your home and are dedicated to providing you with peace of mind and protection.
+            Welcome to NTKN, where we are dedicated to providing you with exceptional and
+            comprehensive auto insurance solutions. Motor insurance is not just a policy; it&apos;s
+            a shield, ensuring you drive with confidence and security knowing that you are protected
+            by NTKN.
           </Typography>
 
           <Typography tag="h4" fontWeight="fw-bold" className="mb-[1.2rem]">
-            Why Choose Our Home Insurance:
+            Why Choose Our Motor Insurance:
           </Typography>
 
           <ul className="w-full flex flex-col gap-[.4rem] mb-[2.4rem]">
             <li>
               <Typography tag="p">
                 <Typography tag="span" fontWeight="fw-bold">
-                  Dwelling Coverage:
+                  Comprehensive Coverage:
                 </Typography>{" "}
-                Protect the structure of your home, including walls, roof, floors, and built-in
-                appliances. Our home insurance provides flexible dwelling coverage based on the
-                replacement cost of your home.
+                Our auto insurance plans are designed to offer comprehensive coverage tailored to
+                your specific needs. Whether you&apos;re looking for basic liability coverage or
+                full protection, we&apos;ve got you covered.
               </Typography>
             </li>
 
             <li>
               <Typography tag="p">
                 <Typography tag="span" fontWeight="fw-bold">
-                  Personal Property Coverage:
+                  Accident and Damage Protection:
                 </Typography>{" "}
-                Safeguard your belongings, such as furniture, clothing, and electronics, with our
-                personal property coverage. The insurance amount is tailored to the estimated value
-                of your personal items.
+                We provide support for repairs and damages resulting from accidents, collisions, or
+                unforeseen incidents. Our goal is to get you back on the road quickly and smoothly.
               </Typography>
             </li>
 
             <li>
               <Typography tag="p">
                 <Typography tag="span" fontWeight="fw-bold">
-                  Liability Coverage:
+                  24/7 Roadside Assistance:
                 </Typography>{" "}
-                Our home insurance includes liability coverage, protecting you if someone is injured
-                on your property or if you accidentally damage someone else&apos;s property.
-                Coverage amounts are determined based on your policy.
+                With NTKN, help is just a call away. Our 24/7 roadside assistance ensures you
+                receive prompt support for breakdowns, flat tires, and other emergencies.
               </Typography>
             </li>
 
             <li>
               <Typography tag="p">
                 <Typography tag="span" fontWeight="fw-bold">
-                  Additional Living Expenses:
+                  Personalized Service:
                 </Typography>{" "}
-                Be prepared for the unexpected. Our home insurance covers additional living
-                expenses, helping with the cost of temporary living arrangements if you can&apos;t
-                stay in your home due to a covered peril.
+                Our dedicated team is committed to providing personalized service. We understand
+                that every driver is unique, and we strive to tailor our services to meet your
+                individual requirements.
               </Typography>
             </li>
 
             <li>
               <Typography tag="p">
                 <Typography tag="span" fontWeight="fw-bold">
-                  Earthquake and Flood Coverage:
+                  Discounts and Special Offers:
                 </Typography>{" "}
-                Customize your coverage to include protection against earthquake and flood damage.
-                The insurance amount is determined by the specific risks in your region.
+                Choosing auto insurance from NTKN means gaining access to exclusive discounts and
+                special offers. We aim to make quality coverage more affordable for you.
               </Typography>
             </li>
           </ul>
 
           <Typography tag="h4" fontWeight="fw-md">
-            Protect Your Home: Partner with NTKN for reliable home insurance. Contact us today for a
-            free consultation and choose the home insurance plan that best suits your needs. Thank
-            you for choosing NTKN - Your trusted partner in securing your home and belongings.
+            Get on the Road Safely: Drive with confidence and peace of mind by partnering with NTKN
+            for your auto insurance needs. Contact us today for a free consultation and select the
+            auto insurance plan that suits your driving lifestyle. Thank you for choosing NTKN -
+            Your trusted companion on the road to safety and security.
           </Typography>
         </Container>
       </Section>
@@ -98,7 +97,7 @@ const HouseInsuranceModule = () => {
             textAlign="center"
             className="mb-[2.4rem]"
           >
-            House Insurance Claim Details
+            Motor Insurance Claim Details
           </Typography>
 
           <table className="w-full mb-[2.4rem]">
@@ -125,7 +124,7 @@ const HouseInsuranceModule = () => {
             </thead>
 
             <tbody>
-              {houseInsuranceData.map((item) => (
+              {motorInsuranceData.map((item) => (
                 <tr className={`flex w-full py-[0.6rem] ${styles.row}`} key={item.id}>
                   <td className={`w-1/4 px-[1rem] ${styles.col}`}>
                     <Typography tag="p" fontWeight="fw-md">
@@ -154,4 +153,4 @@ const HouseInsuranceModule = () => {
   );
 };
 
-export default HouseInsuranceModule;
+export default MotorInsuranceModule;
