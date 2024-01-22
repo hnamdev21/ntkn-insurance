@@ -1,20 +1,44 @@
 "use client";
 
-import { Spin } from "antd";
+import { message, Spin } from "antd";
+import { useRouter } from "next/navigation";
 import React from "react";
 
+import { get } from "@/apis/axiosInstance";
+import Button from "@/components/Button";
 import Typography from "@/components/Typography";
-
-const TIMEOUT = 5000;
+import { path } from "@/constants/route";
 
 const VerifyPage = ({ params }: { params: { token: string } }) => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
+  const verifyAccount = async () => {
+    const response = await get(`/users/verify/${params.token}`);
+
+    if (response.success) {
+      message.success("Verify successfully");
+      router.push(path.Login);
+    }
+
+    setIsLoading(false);
+  };
+
+  const resendVerifyAccount = async () => {
+    setIsLoading(true);
+
+    const response = await get(`/users/verify/${params.token}`);
+
+    if (response.success) {
+      message.success("Resend verify successfully");
+      router.push(path.Login);
+    }
+
+    setIsLoading(false);
+  };
+
   React.useEffect(() => {
-    // Fake API call
-    setTimeout(() => {
-      setIsLoading(false);
-    }, TIMEOUT);
+    verifyAccount();
   }, [params.token]);
 
   return isLoading ? (
@@ -27,7 +51,17 @@ const VerifyPage = ({ params }: { params: { token: string } }) => {
         </Typography>
       </div>
     </div>
-  ) : null;
+  ) : (
+    // Fail case
+    <>
+      <Typography tag="h1" fontSize="fs-md" className="mt-[2.rem]">
+        Failed to verify account
+      </Typography>
+      <Button type="primary" btnWidth="auto" onClick={resendVerifyAccount}>
+        Resend
+      </Button>
+    </>
+  );
 };
 
 export default VerifyPage;

@@ -1,11 +1,13 @@
 "use client";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Spin } from "antd";
+import { message, Spin } from "antd";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as yup from "yup";
 
+import { post } from "@/apis/axiosInstance";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputPassword } from "@/components/Form/Input";
@@ -16,8 +18,8 @@ import { path } from "@/constants/route";
 
 import styles from "./styles.module.scss";
 
-const TIMEOUT = 1000;
 const formValidator = yup.object().shape({
+  fullName: yup.string().required("Please enter full name"),
   username: yup.string().required("Please enter username"),
   password: yup.string().required("Please enter password"),
   confirmPassword: yup
@@ -25,23 +27,28 @@ const formValidator = yup.object().shape({
     .required("Please enter confirm password")
     .oneOf([yup.ref("password")], "Confirm password does not match"),
   email: yup.string().required("Please enter email").email("Please enter a valid email"),
-  receiveNews: yup.boolean(),
 });
 
 function RegisterPage() {
+  const router = useRouter();
+
   // prettier-ignore
-  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm({
+  const { register, handleSubmit, formState: { isSubmitting, errors }, reset } = useForm({
     resolver: yupResolver(formValidator),
     mode: "onBlur",
   });
 
   const onSubmit = async (data: FieldValues) => {
-    // Fake API call
-    await new Promise((resolve) => {
-      setTimeout(resolve, TIMEOUT);
-    });
+    try {
+      const response = await post("/users", data);
 
-    return data;
+      if (response.success) {
+        message.success("Register successfully");
+        router.push(path.Login);
+      }
+    } catch (error) {
+      reset();
+    }
   };
 
   return (
@@ -53,8 +60,21 @@ function RegisterPage() {
         textAlign="center"
         className="mb-[2.8rem]"
       >
-        Create An Account
+        Create Account
       </Typography>
+
+      <Form.Item>
+        <Label htmlFor="fullName" required>
+          Full name
+        </Label>
+        <Input
+          type="text"
+          id="fullName"
+          {...register("fullName")}
+          error={errors.fullName && true}
+        />
+        {errors.fullName && <MessageError>{errors.fullName.message as string}</MessageError>}
+      </Form.Item>
 
       <Form.Item>
         <Label htmlFor="username" required>
@@ -112,16 +132,9 @@ function RegisterPage() {
         )}
       </Form.Item>
 
-      <Form.Item className="flex w-full items-center">
-        <Input type="checkbox" id="receiveNews" {...register("receiveNews")} />
-        <Label htmlFor="receiveNews" className="inline-block ml-[.8rem] mb-[0.0rem]">
-          Receive news and special offers
-        </Label>
-      </Form.Item>
-
       <Form.Item className="mb-0">
         <Button type="submit" btnWidth="full">
-          {isSubmitting ? <Spin /> : "Create"}
+          {isSubmitting ? <Spin /> : "Create Account"}
         </Button>
       </Form.Item>
 

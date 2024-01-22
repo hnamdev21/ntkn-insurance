@@ -1,11 +1,13 @@
 "use client";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Divider, Spin } from "antd";
+import { Divider, message, Spin } from "antd";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as yup from "yup";
 
+import { post } from "@/apis/axiosInstance";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputPassword } from "@/components/Form/Input";
@@ -24,19 +26,25 @@ const formValidator = yup.object().shape({
 });
 
 const LoginPage = () => {
+  const router = useRouter();
+
   // prettier-ignore
-  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm({
+  const { register, handleSubmit, formState: { isSubmitting, errors }, resetField } = useForm({
     resolver: yupResolver(formValidator),
     mode: "onBlur",
   });
 
   const onSubmit = async (data: FieldValues) => {
-    // Fake API call
-    await new Promise((resolve) => {
-      setTimeout(resolve, TIMEOUT);
-    });
+    try {
+      const response = await post("/users/login", data);
 
-    return data;
+      if (response.success) {
+        message.success("Login successfully");
+        router.push(path.Home);
+      }
+    } catch (error) {
+      resetField("password");
+    }
   };
 
   const loginWithGoogle = async () => {
