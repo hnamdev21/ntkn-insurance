@@ -5,9 +5,9 @@ import env from "@/constants/env";
 
 export const axiosInstance = axios.create({
   // baseURL: process.env.NEXT_PUBLIC_API_DEPLOYMENT_URL,
-  baseURL: env.API_LOCAL_URL,
+  baseURL: env.API_LOCAL_URL + "/api",
   headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
+    "Content-Type": "application/json",
     "Access-Control-Allow-Credentials": "true",
     accept: "application/json",
   },
@@ -28,7 +28,7 @@ axiosInstance.interceptors.response.use(
 );
 
 export type DefaultResponse<T> = {
-  status: number;
+  success?: boolean;
   message?: string;
   data: T;
 };

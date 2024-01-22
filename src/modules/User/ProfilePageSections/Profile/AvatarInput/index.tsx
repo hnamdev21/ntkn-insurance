@@ -2,40 +2,27 @@ import Image from "next/image";
 import React from "react";
 
 import { CameraIcon } from "@/components/Icons";
+import env from "@/constants/env";
 
 import styles from "./styles.module.scss";
 
 type AvatarInputProps = React.HTMLAttributes<HTMLInputElement> & {
+  avatarBase64: string | null;
   src?: string;
 };
 
 const AvatarInputComponent = (
-  { ...props }: AvatarInputProps,
+  { avatarBase64, ...props }: AvatarInputProps,
   ref?: React.Ref<HTMLInputElement>
 ) => {
-  const [avatarBase64, setAvatarBase64] = React.useState<string | null>(null);
-
-  const handleOnChangeAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-
-    if (!file) {
-      return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      setAvatarBase64(reader.result as string);
-    };
-
-    reader.readAsDataURL(file);
-  };
-
-  const src = avatarBase64 ?? props.src ?? "/images/default-avatar.png";
+  const src =
+    avatarBase64 ??
+    (props.src && `${env.API_LOCAL_URL}/${props.src}`) ??
+    "/images/default-avatar.png";
 
   return (
     <div className={`${styles.container}`}>
-      <label htmlFor="avatar" className={`${styles.avatarContainer}`}>
+      <label htmlFor="avatarImage" className={`${styles.avatarContainer}`}>
         <Image
           src={src}
           alt={"Ảnh đại diện của người dùng ..."}
@@ -49,12 +36,11 @@ const AvatarInputComponent = (
       </label>
       <input
         type="file"
-        name="avatar"
-        id="avatar"
         accept="image/*"
         style={{ display: "none" }}
-        onChange={handleOnChangeAvatar}
+        id="avatarImage"
         ref={ref}
+        // onChange={handleOnChangeAvatar}
         {...props}
       />
     </div>

@@ -55,9 +55,9 @@ const ClaimRequests = () => {
     mode: "onBlur",
   });
 
-  const [previewOpen, setPreviewOpen] = React.useState(false);
-  const [previewImage, setPreviewImage] = React.useState("");
-  const [previewTitle, setPreviewTitle] = React.useState("");
+  const [previewOpen, setPreviewOpen] = React.useState<boolean>(false);
+  const [previewImage, setPreviewImage] = React.useState<string>("");
+  const [previewTitle, setPreviewTitle] = React.useState<string>("");
   const [fileList, setFileList] = React.useState<UploadFile[]>([]);
 
   const onSubmit = async (data: FieldValues) => {
