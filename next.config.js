@@ -33,6 +33,16 @@ const nextConfig = {
     });
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: process.env.NEXT_PUBLIC_API_HOSTING || "localhost",
+        port: "5030",
+        pathname: "/*/**",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
