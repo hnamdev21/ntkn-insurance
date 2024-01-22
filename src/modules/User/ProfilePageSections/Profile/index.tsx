@@ -13,27 +13,11 @@ import Form from "@/components/Form";
 import Input from "@/components/Form/Input";
 import Label from "@/components/Form/Label";
 import MessageError from "@/components/Form/MessageError";
-import Select from "@/components/Form/Select";
 import { sentRequestWithFilesHeaderConfig } from "@/constants/configRequest";
 import { MB } from "@/constants/other";
 
 import AvatarInput from "./AvatarInput";
 import styles from "./styles.module.scss";
-
-const genderOptions = [
-  {
-    label: "Male",
-    value: "male",
-  },
-  {
-    label: "Female",
-    value: "female",
-  },
-  {
-    label: "Unknown",
-    value: "unknown",
-  },
-];
 
 const MAX_MB = 2;
 
@@ -43,7 +27,7 @@ const formValidator = yup.object().shape({
   address: yup.string(),
   phoneNumber: yup.string(),
   avatarImage: yup.mixed().test("fileSize", "The file is too large", (value: any) => {
-    if (!value) {
+    if (!value[0]) {
       return true;
     }
 
@@ -148,16 +132,6 @@ const Profile = () => {
               error={errors.fullName && true}
             />
             {errors.fullName && <MessageError>{errors.fullName.message}</MessageError>}
-          </div>
-
-          <div className="flex-1">
-            <Label htmlFor="gender">Gender</Label>
-            <Select
-              id="gender"
-              {...register("gender")}
-              options={genderOptions}
-              defaultValue={profile?.gender}
-            />
           </div>
 
           <div className="flex-1">

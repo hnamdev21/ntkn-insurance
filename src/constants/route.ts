@@ -21,6 +21,7 @@ export const path = {
   Blogs: "/news",
   About: "/about",
   Contact: "/contact",
+  Profile: "/profile",
   FAQs: "/faqs",
   Register: "/register",
   Login: "/login",

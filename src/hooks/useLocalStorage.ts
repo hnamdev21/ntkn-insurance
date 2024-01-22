@@ -2,15 +2,17 @@
 
 import React from "react";
 
-const useLocalStorage = <T>(key: string, initialValue: T): [T, (value: T) => void] => {
-  const [storedValue, setStoredValue] = React.useState<T>(() => {
+const useLocalStorage = <T>(key: string, initialValue: T): [T | null, (value: T) => void] => {
+  const [storedValue, setStoredValue] = React.useState<T | null>(null);
+
+  React.useEffect(() => {
     try {
       const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      setStoredValue(item ? JSON.parse(item) : initialValue);
     } catch (error) {
-      return initialValue;
+      setStoredValue(initialValue);
     }
-  });
+  }, [key, initialValue]);
 
   const setValue = (value: T) => {
     try {
