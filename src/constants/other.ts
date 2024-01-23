@@ -20,6 +20,7 @@ export const roleOptions = [
   { label: "All", value: "0" },
   { label: "Admin", value: "2" },
   { label: "User", value: "1" },
+  { label: "Employee", value: "3" },
 ];
 
 export const statusOptions = [
