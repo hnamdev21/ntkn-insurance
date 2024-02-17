@@ -38,8 +38,8 @@ const UserManagementModule = () => {
     }[]
   >([]);
   const [filter, setFilter] = React.useState({
-    role: "0",
-    status: "0",
+    role: "",
+    status: "",
     sort: "default",
     page: 1,
     pageSize: 20,

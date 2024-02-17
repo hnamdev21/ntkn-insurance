@@ -17,14 +17,14 @@ export const genderOptions = [
 ];
 
 export const roleOptions = [
-  { label: "All", value: "0" },
+  { label: "All", value: "" },
   { label: "Admin", value: "2" },
   { label: "User", value: "1" },
   { label: "Employee", value: "3" },
 ];
 
 export const statusOptions = [
-  { label: "All", value: "0" },
+  { label: "All", value: "" },
   { label: "Pending", value: "1" },
   { label: "Active", value: "2" },
   { label: "Inactive", value: "3" },

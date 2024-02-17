@@ -7,7 +7,16 @@ import { Text } from "@/components/Typography";
 import styles from "./styles.module.scss";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
-  type?: "text" | "checkbox" | "radio" | "password" | "email" | "submit";
+  type?:
+    | "text"
+    | "checkbox"
+    | "radio"
+    | "password"
+    | "email"
+    | "submit"
+    | "number"
+    | "date"
+    | "datetime-local";
   sizeElement?: "sm" | "normal" | "md" | "lg";
   width?: "full" | "auto" | "max-content";
   error?: boolean;
