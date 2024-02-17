@@ -16,7 +16,8 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
     | "submit"
     | "number"
     | "date"
-    | "datetime-local";
+    | "datetime-local"
+    | "hidden";
   sizeElement?: "sm" | "normal" | "md" | "lg";
   width?: "full" | "auto" | "max-content";
   error?: boolean;

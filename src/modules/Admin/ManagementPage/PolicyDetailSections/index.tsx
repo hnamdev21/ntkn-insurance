@@ -2,12 +2,11 @@
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { message, Spin } from "antd";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
-import { get, post } from "@/apis/axiosInstance";
+import { get, put } from "@/apis/axiosInstance";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input from "@/components/Form/Input";
@@ -17,110 +16,112 @@ import Typography from "@/components/Typography";
 
 import styles from "./styles.module.scss";
 
+type Props = {
+  slug: string;
+};
+
 const MIN_AGE = 16;
 const MIN_CONTRACT_MONTH_TERM = 1;
 const MIN_FEE_AMOUNT = 100;
 
 const formValidator = yup.object().shape({
+  id: yup.number().required("Please enter id"),
   title: yup.string().required("Please enter title"),
   insuredAge: yup
     .number()
     .required("Please enter insured age")
     .positive("Please enter a positive number")
     .integer("Please enter an integer")
-    .min(MIN_AGE, "Please enter a number greater than 1"),
+    .min(MIN_AGE, "Please enter a number greater than " + MIN_AGE),
   contractMonthTerm: yup
     .number()
     .required("Please enter contract month term")
     .positive("Please enter a positive number")
     .integer("Please enter an integer")
-    .min(MIN_CONTRACT_MONTH_TERM, "Please enter a number greater than 1"),
+    .min(MIN_CONTRACT_MONTH_TERM, "Please enter a number greater than " + MIN_CONTRACT_MONTH_TERM),
   feeAmount: yup
     .number()
     .required("Please enter fee amount")
     .positive("Please enter a positive number")
-    .min(MIN_FEE_AMOUNT, "Please enter a number greater than 100"),
+    .min(MIN_FEE_AMOUNT, "Please enter a number greater than " + MIN_FEE_AMOUNT),
 });
 
-const PoliciesModule = () => {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [policies, setPolicies] = React.useState<
+const PolicyDetailModule = ({ slug }: Props) => {
+  const [claims, setClaims] = React.useState<
     {
       id: number;
-      title: string;
-      slug: string;
-      insuredAge: number;
-      contractMonthTerm: number;
-      feeAmount: number;
+      coverage: string;
+      insuranceAmount: number;
+      details: string;
     }[]
   >([]);
-
   // prettier-ignore
-  const { register, handleSubmit, formState: { isSubmitting, errors }, reset } = useForm({
+  const { register, handleSubmit, formState: { isSubmitting, errors }, setValue } = useForm({
     resolver: yupResolver(formValidator),
     mode: "onBlur",
-    values: {
-      title: "",
-      insuredAge: MIN_AGE,
-      contractMonthTerm: MIN_CONTRACT_MONTH_TERM,
-      feeAmount: MIN_FEE_AMOUNT,
-    },
   });
 
-  const navigate = (slug: string) => {
-    router.push(`/admin/policies/${slug}`);
-  };
-
-  const fetchPolicies = async () => {
-    setIsLoading(true);
-    isLoading; // JUST TO REMOVE TS ERROR
-
-    try {
-      const response = await get<[]>(`/policies`);
-
-      if (response.success) {
-        setPolicies(response.data);
-      }
-    } catch (error) {
-      //
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const onSubmit = async (data: {
+    id: number;
     title: string;
     insuredAge: number;
     contractMonthTerm: number;
     feeAmount: number;
   }) => {
-    setIsLoading(true);
-
     try {
-      const response = await post(`/policies`, data);
+      const response = await put("/policies/" + data.id, data);
 
       if (response.success) {
-        message.success("Policy created successfully");
-        fetchPolicies();
+        message.success("Policy updated successfully");
       }
     } catch (error) {
       //
     } finally {
-      setIsLoading(false);
-      reset();
+      //
+    }
+  };
+
+  const fetchPolicy = async () => {
+    try {
+      const response = await get<{
+        id: number;
+        title: string;
+        insuredAge: number;
+        contractMonthTerm: number;
+        feeAmount: number;
+        claimDetails: {
+          id: number;
+          coverage: string;
+          insuranceAmount: number;
+          details: string;
+        }[];
+      }>(`/policies?slug=${slug}`);
+
+      if (response.success) {
+        const { title, insuredAge, contractMonthTerm, feeAmount, claimDetails } = response.data;
+        setValue("id", response.data.id);
+        setValue("title", title);
+        setValue("insuredAge", insuredAge);
+        setValue("contractMonthTerm", contractMonthTerm);
+        setValue("feeAmount", feeAmount);
+        setClaims(claimDetails);
+      }
+    } catch (error) {
+      //
     }
   };
 
   React.useEffect(() => {
-    fetchPolicies();
-  }, []);
+    fetchPolicy();
+  }, [slug]);
 
   return (
     <div>
       <div className="mb-[.8rem] flex gap-[2.4rem]">
         <div className="w-1/4 mb-[2.4rem]">
           <Form onSubmit={handleSubmit(onSubmit)}>
+            <Input type="hidden" id="id" {...register("id")} />
+
             <Form.Item>
               <Label htmlFor="title">Title</Label>
               <Input type="text" id="title" {...register("title")} error={errors.title && true} />
@@ -168,7 +169,7 @@ const PoliciesModule = () => {
 
             <Form.Item className="mb-0">
               <Button type="submit" btnWidth="full">
-                {isSubmitting ? <Spin /> : "Create"}
+                {isSubmitting ? <Spin /> : "Edit"}
               </Button>
             </Form.Item>
           </Form>
@@ -183,66 +184,50 @@ const PoliciesModule = () => {
                 </Typography>
               </th>
 
-              <th className="w-1/3 px-[1rem]">
-                <Typography tag="h5" fontWeight="fw-md">
-                  Title
-                </Typography>
-              </th>
-
-              <th className="w-1/6 px-[1rem]">
-                <Typography tag="h5" fontWeight="fw-md">
-                  Insured age
-                </Typography>
-              </th>
-
               <th className="w-1/5 px-[1rem]">
                 <Typography tag="h5" fontWeight="fw-md">
-                  Contract month term
+                  Coverage
                 </Typography>
               </th>
 
               <th className="w-1/6 px-[1rem]">
                 <Typography tag="h5" fontWeight="fw-md">
-                  Fee amount
+                  Insurance amount
+                </Typography>
+              </th>
+
+              <th className="w-1/3 px-[1rem]">
+                <Typography tag="h5" fontWeight="fw-md">
+                  Details
                 </Typography>
               </th>
             </tr>
           </thead>
 
           <tbody>
-            {policies.map((policy) => (
-              <tr
-                key={policy.id}
-                className={`flex w-full py-[0.6rem] ${styles.row}`}
-                onClick={() => navigate(policy.slug)}
-              >
+            {claims.map((claim) => (
+              <tr key={claim.id} className={`flex w-full py-[0.6rem]`}>
                 <td className={`w-1/12 px-[1rem] ${styles.col}`}>
                   <Typography tag="p" fontWeight="fw-md">
-                    {policy.id}
-                  </Typography>
-                </td>
-
-                <td className={`w-1/3 px-[1rem] ${styles.col}`}>
-                  <Typography tag="p" fontWeight="fw-md">
-                    {policy.title}
-                  </Typography>
-                </td>
-
-                <td className={`w-1/6 px-[1rem] ${styles.col}`}>
-                  <Typography tag="p" fontWeight="fw-md">
-                    {policy.insuredAge}
+                    {claim.id}
                   </Typography>
                 </td>
 
                 <td className={`w-1/5 px-[1rem] ${styles.col}`}>
                   <Typography tag="p" fontWeight="fw-md">
-                    {policy.contractMonthTerm}
+                    {claim.coverage}
                   </Typography>
                 </td>
 
                 <td className={`w-1/6 px-[1rem] ${styles.col}`}>
                   <Typography tag="p" fontWeight="fw-md">
-                    {policy.feeAmount}
+                    {claim.insuranceAmount}
+                  </Typography>
+                </td>
+
+                <td className={`w-1/3 px-[1rem] ${styles.col}`}>
+                  <Typography tag="p" fontWeight="fw-md">
+                    {claim.details}
                   </Typography>
                 </td>
               </tr>
@@ -254,4 +239,4 @@ const PoliciesModule = () => {
   );
 };
 
-export default PoliciesModule;
+export default PolicyDetailModule;

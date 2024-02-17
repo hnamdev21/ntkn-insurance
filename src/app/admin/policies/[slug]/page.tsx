@@ -1,7 +1,15 @@
 import React from "react";
 
-const Policy = () => {
-  return <div>Policy</div>;
+import PolicyDetailModule from "@/modules/Admin/ManagementPage/PolicyDetailSections";
+
+type Props = {
+  params: {
+    slug: string;
+  };
+};
+
+const Policy = ({ params }: Props) => {
+  return <PolicyDetailModule slug={params.slug} />;
 };
 
 export default Policy;
