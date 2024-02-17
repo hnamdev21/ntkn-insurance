@@ -5,7 +5,6 @@ import { message, Spin } from "antd";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 
 import { get, post } from "@/apis/axiosInstance";
 import Button from "@/components/Button";
@@ -14,51 +13,24 @@ import Input from "@/components/Form/Input";
 import Label from "@/components/Form/Label";
 import MessageError from "@/components/Form/MessageError";
 import Typography from "@/components/Typography";
+import { Policy } from "@/constants/data";
+import {
+  MIN_AGE,
+  MIN_CONTRACT_MONTH_TERM,
+  MIN_FEE_AMOUNT,
+  policyFormValidator,
+} from "@/constants/formValidator";
 
 import styles from "./styles.module.scss";
-
-const MIN_AGE = 16;
-const MIN_CONTRACT_MONTH_TERM = 1;
-const MIN_FEE_AMOUNT = 100;
-
-const formValidator = yup.object().shape({
-  title: yup.string().required("Please enter title"),
-  insuredAge: yup
-    .number()
-    .required("Please enter insured age")
-    .positive("Please enter a positive number")
-    .integer("Please enter an integer")
-    .min(MIN_AGE, "Please enter a number greater than 1"),
-  contractMonthTerm: yup
-    .number()
-    .required("Please enter contract month term")
-    .positive("Please enter a positive number")
-    .integer("Please enter an integer")
-    .min(MIN_CONTRACT_MONTH_TERM, "Please enter a number greater than 1"),
-  feeAmount: yup
-    .number()
-    .required("Please enter fee amount")
-    .positive("Please enter a positive number")
-    .min(MIN_FEE_AMOUNT, "Please enter a number greater than 100"),
-});
 
 const PoliciesModule = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
-  const [policies, setPolicies] = React.useState<
-    {
-      id: number;
-      title: string;
-      slug: string;
-      insuredAge: number;
-      contractMonthTerm: number;
-      feeAmount: number;
-    }[]
-  >([]);
+  const [policies, setPolicies] = React.useState<Policy[]>([]);
 
   // prettier-ignore
   const { register, handleSubmit, formState: { isSubmitting, errors }, reset } = useForm({
-    resolver: yupResolver(formValidator),
+    resolver: yupResolver(policyFormValidator),
     mode: "onBlur",
     values: {
       title: "",

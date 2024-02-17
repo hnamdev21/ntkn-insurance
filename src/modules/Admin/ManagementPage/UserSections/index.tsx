@@ -13,6 +13,8 @@ import Input from "@/components/Form/Input";
 import Label from "@/components/Form/Label";
 import Select from "@/components/Form/Select";
 import Typography from "@/components/Typography";
+import { User } from "@/constants/data";
+import { defaultValueUserFilter } from "@/constants/defaultValue";
 import { roleOptions, sortOptions, statusOptions } from "@/constants/other";
 import useDebounce from "@/hooks/useDebounce";
 
@@ -26,24 +28,8 @@ const formValidator = yup.object().shape({
 
 const UserManagementModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [users, setUsers] = React.useState<
-    {
-      id: string;
-      fullName: string;
-      email: string;
-      address: string;
-      phone: string;
-      role: number;
-      status: number;
-    }[]
-  >([]);
-  const [filter, setFilter] = React.useState({
-    role: "",
-    status: "",
-    sort: "default",
-    page: 1,
-    pageSize: 20,
-  });
+  const [users, setUsers] = React.useState<User[]>([]);
+  const [filter, setFilter] = React.useState(defaultValueUserFilter);
   const [term, setTerm] = React.useState("");
   const termDebounce = useDebounce(term);
 

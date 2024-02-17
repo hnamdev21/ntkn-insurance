@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { message, Spin } from "antd";
 import React from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 
 import { get, put } from "@/apis/axiosInstance";
 import Button from "@/components/Button";
@@ -13,6 +12,8 @@ import Input from "@/components/Form/Input";
 import Label from "@/components/Form/Label";
 import MessageError from "@/components/Form/MessageError";
 import Typography from "@/components/Typography";
+import { Claim, Policy, PolicyForm } from "@/constants/data";
+import { policyFormValidator } from "@/constants/formValidator";
 
 import styles from "./styles.module.scss";
 
@@ -20,54 +21,15 @@ type Props = {
   slug: string;
 };
 
-const MIN_AGE = 16;
-const MIN_CONTRACT_MONTH_TERM = 1;
-const MIN_FEE_AMOUNT = 100;
-
-const formValidator = yup.object().shape({
-  id: yup.number().required("Please enter id"),
-  title: yup.string().required("Please enter title"),
-  insuredAge: yup
-    .number()
-    .required("Please enter insured age")
-    .positive("Please enter a positive number")
-    .integer("Please enter an integer")
-    .min(MIN_AGE, "Please enter a number greater than " + MIN_AGE),
-  contractMonthTerm: yup
-    .number()
-    .required("Please enter contract month term")
-    .positive("Please enter a positive number")
-    .integer("Please enter an integer")
-    .min(MIN_CONTRACT_MONTH_TERM, "Please enter a number greater than " + MIN_CONTRACT_MONTH_TERM),
-  feeAmount: yup
-    .number()
-    .required("Please enter fee amount")
-    .positive("Please enter a positive number")
-    .min(MIN_FEE_AMOUNT, "Please enter a number greater than " + MIN_FEE_AMOUNT),
-});
-
 const PolicyDetailModule = ({ slug }: Props) => {
-  const [claims, setClaims] = React.useState<
-    {
-      id: number;
-      coverage: string;
-      insuranceAmount: number;
-      details: string;
-    }[]
-  >([]);
+  const [claims, setClaims] = React.useState<Claim[]>([]);
   // prettier-ignore
   const { register, handleSubmit, formState: { isSubmitting, errors }, setValue } = useForm({
-    resolver: yupResolver(formValidator),
+    resolver: yupResolver(policyFormValidator),
     mode: "onBlur",
   });
 
-  const onSubmit = async (data: {
-    id: number;
-    title: string;
-    insuredAge: number;
-    contractMonthTerm: number;
-    feeAmount: number;
-  }) => {
+  const onSubmit = async (data: PolicyForm) => {
     try {
       const response = await put("/policies/" + data.id, data);
 
@@ -83,19 +45,7 @@ const PolicyDetailModule = ({ slug }: Props) => {
 
   const fetchPolicy = async () => {
     try {
-      const response = await get<{
-        id: number;
-        title: string;
-        insuredAge: number;
-        contractMonthTerm: number;
-        feeAmount: number;
-        claimDetails: {
-          id: number;
-          coverage: string;
-          insuranceAmount: number;
-          details: string;
-        }[];
-      }>(`/policies?slug=${slug}`);
+      const response = await get<Policy>(`/policies?slug=${slug}`);
 
       if (response.success) {
         const { title, insuredAge, contractMonthTerm, feeAmount, claimDetails } = response.data;
