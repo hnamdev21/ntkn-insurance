@@ -90,7 +90,7 @@ const PoliciesModule = () => {
 
   return (
     <div>
-      <div className="mb-[.8rem] flex gap-[2.4rem]">
+      <div className="flex gap-[2.4rem]">
         <div className="w-1/4 mb-[2.4rem]">
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Item>

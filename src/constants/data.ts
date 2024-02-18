@@ -1,5 +1,5 @@
 export type User = {
-  id: string;
+  id: number;
   fullName: string;
   email: string;
   address: string;
@@ -16,7 +16,7 @@ export type Claim = {
 };
 
 export type Policy = {
-  id?: number;
+  id: number;
   title: string;
   slug: string;
   insuredAge: number;
@@ -26,3 +26,4 @@ export type Policy = {
 };
 
 export type PolicyForm = Omit<Policy, "claimDetails" | "slug">;
+export type ClaimForm = Omit<Claim, "id">;

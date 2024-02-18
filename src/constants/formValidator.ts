@@ -25,3 +25,17 @@ export const policyFormValidator = yup.object().shape({
     .positive("Please enter a positive number")
     .min(MIN_FEE_AMOUNT, "Please enter a number greater than " + MIN_FEE_AMOUNT),
 });
+
+export const updateClaimFormValidator = yup.object().shape({
+  id: yup.number().required("Please enter id"),
+  coverage: yup.string().required("Please enter coverage"),
+  insuranceAmount: yup.number().required("Please enter insurance amount"),
+  details: yup.string().required("Please enter details"),
+});
+
+export const createClaimFormValidator = yup.object().shape({
+  policyId: yup.number().required("Please enter policy id"),
+  coverage: yup.string().required("Please enter coverage"),
+  insuranceAmount: yup.number().required("Please enter insurance amount"),
+  details: yup.string().required("Please enter details"),
+});

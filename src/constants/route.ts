@@ -3,7 +3,6 @@ import {
   BookOpenIcon,
   ChartIcon,
   CreditCardIcon,
-  HandHoldingHeart,
   LayersIcon,
   MoneyIcon,
   UserIcon,
@@ -69,7 +68,7 @@ export const adminPath = {
   Users: "/admin/users",
   Blogs: "/admin/blogs",
   Policies: "/admin/policies",
-  Claims: "/admin/claims",
+  // Claims: "/admin/claims",
   Loans: "/admin/loans",
   Payments: "/admin/payments",
   Logs: "/admin/logs",
@@ -87,11 +86,11 @@ export const adminRoute = {
     label: "Policies",
     icon: LayersIcon,
   },
-  Claims: {
-    path: adminPath.Claims,
-    label: "Claims",
-    icon: HandHoldingHeart,
-  },
+  // Claims: {
+  //   path: adminPath.Claims,
+  //   label: "Claims",
+  //   icon: HandHoldingHeart,
+  // },
   Users: {
     path: adminPath.Users,
     label: "Users",
