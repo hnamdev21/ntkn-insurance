@@ -26,13 +26,15 @@ type Props = {
 };
 
 const PolicyDetailModule = ({ slug }: Props) => {
-  const [editMode, setEditMode] = React.useState<boolean>(false);
+  const [editClaimMode, setEditClaimMode] = React.useState<boolean>(false);
+  const [editPolicyMode, setEditPolicyMode] = React.useState<boolean>(true);
   const [claims, setClaims] = React.useState<Claim[]>([]);
 
   // prettier-ignore
   const { register, handleSubmit, formState: { isSubmitting, errors }, setValue } = useForm({
     resolver: yupResolver(policyFormValidator),
     mode: "onBlur",
+    disabled: React.useMemo(() => editPolicyMode, [editPolicyMode]),
   });
 
   // prettier-ignore
@@ -48,7 +50,7 @@ const PolicyDetailModule = ({ slug }: Props) => {
   });
 
   const switchToEditMode = (claim: Claim) => {
-    setEditMode(true);
+    setEditClaimMode(true);
     setValueUpdateClaimForm("id", claim.id);
     setValueUpdateClaimForm("coverage", claim.coverage);
     setValueUpdateClaimForm("insuranceAmount", claim.insuranceAmount);
@@ -98,7 +100,7 @@ const PolicyDetailModule = ({ slug }: Props) => {
     } catch (error) {
       //
     } finally {
-      setEditMode(false);
+      setEditClaimMode(false);
       fetchPolicy();
     }
   };
@@ -137,29 +139,33 @@ const PolicyDetailModule = ({ slug }: Props) => {
             </Form.Item>
 
             <Form.Item>
-              <Label htmlFor="insuredAge">Insured age</Label>
-              <Input
-                type="number"
-                id="insuredAge"
-                {...register("insuredAge")}
-                error={errors.insuredAge && true}
-              />
+              <div className="flex gap-[.8rem]">
+                <div className="flex-1">
+                  <Label htmlFor="insuredAge">Insured age</Label>
+                  <Input
+                    type="number"
+                    id="insuredAge"
+                    {...register("insuredAge")}
+                    error={errors.insuredAge && true}
+                  />
 
-              {errors.insuredAge && <MessageError>{errors.insuredAge.message}</MessageError>}
-            </Form.Item>
+                  {errors.insuredAge && <MessageError>{errors.insuredAge.message}</MessageError>}
+                </div>
 
-            <Form.Item>
-              <Label htmlFor="contractMonthTerm">Contract month term</Label>
-              <Input
-                type="number"
-                id="contractMonthTerm"
-                {...register("contractMonthTerm")}
-                error={errors.contractMonthTerm && true}
-              />
+                <div className="w-2/3">
+                  <Label htmlFor="contractMonthTerm">Contract month term</Label>
+                  <Input
+                    type="number"
+                    id="contractMonthTerm"
+                    {...register("contractMonthTerm")}
+                    error={errors.contractMonthTerm && true}
+                  />
 
-              {errors.contractMonthTerm && (
-                <MessageError>{errors.contractMonthTerm.message}</MessageError>
-              )}
+                  {errors.contractMonthTerm && (
+                    <MessageError>{errors.contractMonthTerm.message}</MessageError>
+                  )}
+                </div>
+              </div>
             </Form.Item>
 
             <Form.Item>
@@ -175,9 +181,35 @@ const PolicyDetailModule = ({ slug }: Props) => {
             </Form.Item>
 
             <Form.Item className="mb-0">
-              <Button type="submit" btnWidth="full">
+              {editPolicyMode ? (
+                <Button
+                  type="button"
+                  btnVariant="secondary"
+                  btnWidth="full"
+                  onClick={() => setEditPolicyMode(false)}
+                >
+                  Edit
+                </Button>
+              ) : (
+                <div className="flex gap-[.8rem]">
+                  <Button type="submit" btnWidth="full">
+                    {isSubmitting ? <Spin /> : "Save"}
+                  </Button>
+
+                  <Button
+                    type="button"
+                    btnVariant="secondary"
+                    btnWidth="full"
+                    onClick={() => setEditPolicyMode(true)}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              )}
+
+              {/* <Button type="submit" btnWidth="full">
                 {isSubmitting ? <Spin /> : "Edit"}
-              </Button>
+              </Button> */}
             </Form.Item>
           </Form>
         </div>
@@ -261,7 +293,7 @@ const PolicyDetailModule = ({ slug }: Props) => {
 
           <div>
             {claims.map((claim) => {
-              if (editMode) {
+              if (editClaimMode) {
                 return (
                   <Form
                     key={claim.id}
@@ -316,7 +348,7 @@ const PolicyDetailModule = ({ slug }: Props) => {
                       <Button
                         btnVariant="secondary"
                         btnSize="sm"
-                        onClick={() => setEditMode(false)}
+                        onClick={() => setEditClaimMode(false)}
                       >
                         Cancel
                       </Button>
@@ -326,7 +358,10 @@ const PolicyDetailModule = ({ slug }: Props) => {
               }
 
               return (
-                <div key={claim.id} className={`flex w-full py-[0.6rem]`}>
+                <div
+                  key={claim.id}
+                  className={`flex items-center w-full py-[0.6rem] ${styles.row}`}
+                >
                   <div className={`w-1/12 px-[1rem] ${styles.col}`}>
                     <Typography tag="p" fontWeight="fw-md">
                       {claim.id}
