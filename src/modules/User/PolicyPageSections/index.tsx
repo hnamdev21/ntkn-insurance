@@ -5,6 +5,7 @@ import React from "react";
 import { get } from "@/apis/axiosInstance";
 import Button from "@/components/Button";
 import Container from "@/components/Container";
+import Modal from "@/components/Modal";
 import Section from "@/components/Section";
 import Typography from "@/components/Typography";
 import { Policy } from "@/constants/data";
@@ -17,6 +18,7 @@ type Props = {
 
 const PolicyModule = ({ slug }: Props) => {
   const [policy, setPolicy] = React.useState<Policy | null>(null);
+  const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false);
 
   const fetchPolicy = async () => {
     try {
@@ -56,7 +58,7 @@ const PolicyModule = ({ slug }: Props) => {
       <Section>
         <Container>
           <div className="inline-block w-auto mx-auto">
-            <Button>Buy Now</Button>
+            <Button onClick={() => setIsOpenModal(!isOpenModal)}>Buy Now</Button>
           </div>
 
           <Typography
@@ -118,6 +120,12 @@ const PolicyModule = ({ slug }: Props) => {
           </table>
         </Container>
       </Section>
+
+      {isOpenModal && (
+        <Modal isOpen={isOpenModal} onClose={() => setIsOpenModal(false)}>
+          Ok
+        </Modal>
+      )}
     </>
   );
 };
