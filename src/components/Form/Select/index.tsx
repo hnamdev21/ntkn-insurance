@@ -8,6 +8,7 @@ import styles from "./styles.module.scss";
 type Option = {
   value: string;
   label: string;
+  disabled?: boolean;
 };
 
 type SelectComponentProps = React.HTMLAttributes<HTMLSelectElement> & {
@@ -50,7 +51,12 @@ function SelectComponent(
   return (
     <select id={id} name={name} {...props} defaultValue={value} className={classes} ref={ref}>
       {options.map((option) => (
-        <option key={option.value} value={option.value} className={styles.option}>
+        <option
+          key={option.value}
+          value={option.value}
+          className={styles.option}
+          disabled={option.disabled}
+        >
           {option.label}
         </option>
       ))}

@@ -35,3 +35,8 @@ export const sortOptions = [
   { label: "Newest", value: "newest" },
   { label: "Oldest", value: "oldest" },
 ];
+
+export const paymentMethodOptions = [
+  { label: "Credit Card", value: "1" },
+  { label: "Loan", value: "2" },
+];

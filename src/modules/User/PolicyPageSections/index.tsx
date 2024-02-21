@@ -1,14 +1,23 @@
 "use client";
 
+import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
+import { useForm } from "react-hook-form";
 
-import { get } from "@/apis/axiosInstance";
+import { get, post } from "@/apis/axiosInstance";
 import Button from "@/components/Button";
 import Container from "@/components/Container";
+import Form from "@/components/Form";
+import Input from "@/components/Form/Input";
+import Label from "@/components/Form/Label";
+import MessageError from "@/components/Form/MessageError";
+import Select from "@/components/Form/Select";
 import Modal from "@/components/Modal";
 import Section from "@/components/Section";
 import Typography from "@/components/Typography";
 import { Policy } from "@/constants/data";
+import { createContractFormValidator, CreateContractFormValues } from "@/constants/formValidator";
+import { paymentMethodOptions } from "@/constants/other";
 
 import styles from "./styles.module.scss";
 
@@ -20,12 +29,33 @@ const PolicyModule = ({ slug }: Props) => {
   const [policy, setPolicy] = React.useState<Policy | null>(null);
   const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false);
 
+  // prettier-ignore
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm({
+    resolver: yupResolver(createContractFormValidator),
+    mode: "onBlur",
+  });
+
+  const onSubmit = async (data: CreateContractFormValues) => {
+    try {
+      const response = await post("/contracts", data);
+
+      if (response.success) {
+        //
+      }
+    } catch (error) {
+      //
+    } finally {
+      //
+    }
+  };
+
   const fetchPolicy = async () => {
     try {
       const response = await get<Policy>(`/policies?slug=${slug}`);
 
       if (response.success) {
         setPolicy(response.data);
+        setValue("policyId", response.data.id);
       }
     } catch (error) {
       //
@@ -122,8 +152,80 @@ const PolicyModule = ({ slug }: Props) => {
       </Section>
 
       {isOpenModal && (
-        <Modal isOpen={isOpenModal} onClose={() => setIsOpenModal(false)}>
-          Ok
+        <Modal onClose={() => setIsOpenModal(false)}>
+          <div className="relative z-50 lg:w-1/3 bg-white rounded-2xl">
+            <div className="p-8">
+              <Typography tag="h3" fontSize="fs-xl" fontWeight="fw-bold" className="mb-[2.4rem]">
+                {policy?.title}
+              </Typography>
+
+              <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                <Input type="hidden" id="policyId" {...register("policyId")} />
+
+                <Form.Item className="flex gap-[1.6rem]">
+                  <div className="flex-1">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      type="text"
+                      id="email"
+                      {...register("email")}
+                      error={errors.email && true}
+                    />
+                    {errors.email && <MessageError>{errors.email.message}</MessageError>}
+                  </div>
+
+                  <div className="flex-1">
+                    <Label htmlFor="phone">Phone</Label>
+                    <Input
+                      type="text"
+                      id="phone"
+                      {...register("phone")}
+                      error={errors.phone && true}
+                    />
+                    {errors.phone && <MessageError>{errors.phone.message}</MessageError>}
+                  </div>
+                </Form.Item>
+
+                <Form.Item className="flex gap-[1.6rem]">
+                  <div className="flex-1">
+                    <Label htmlFor="address">Address</Label>
+                    <Input
+                      type="text"
+                      id="address"
+                      {...register("address")}
+                      error={errors.address && true}
+                    />
+                    {errors.address && <MessageError>{errors.address.message}</MessageError>}
+                  </div>
+
+                  <div className="w-1/3">
+                    <Label htmlFor="paymentMethod">Payment Method</Label>
+                    <Select
+                      id="paymentMethod"
+                      {...register("paymentMethod")}
+                      options={paymentMethodOptions}
+                    />
+                  </div>
+                </Form.Item>
+
+                <div className="flex items-center gap-[1.6rem] justify-end">
+                  <Typography tag="p" fontWeight="fw-bold" fontSize="fs-lg">
+                    {policy?.feeAmount} $
+                  </Typography>
+                  <Button className="w-full" type="submit">
+                    Buy
+                  </Button>
+                </div>
+              </Form>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setIsOpenModal(false)}
+            className="absolute top-0 right-1 text-4xl p-1 hover:opacity-40 ease-in-out transition-all"
+          >
+            &times;
+          </button>
         </Modal>
       )}
     </>

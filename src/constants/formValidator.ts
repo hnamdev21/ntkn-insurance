@@ -27,15 +27,24 @@ export const policyFormValidator = yup.object().shape({
 });
 
 export const updateClaimFormValidator = yup.object().shape({
-  id: yup.number().required("Please enter id"),
+  id: yup.number().required(),
   coverage: yup.string().required("Please enter coverage"),
   insuranceAmount: yup.number().required("Please enter insurance amount"),
   details: yup.string().required("Please enter details"),
 });
 
 export const createClaimFormValidator = yup.object().shape({
-  policyId: yup.number().required("Please enter policy id"),
+  policyId: yup.number().required("Please choose policy"),
   coverage: yup.string().required("Please enter coverage"),
   insuranceAmount: yup.number().required("Please enter insurance amount"),
   details: yup.string().required("Please enter details"),
 });
+
+export const createContractFormValidator = yup.object().shape({
+  policyId: yup.number().required("Please choose policy"),
+  email: yup.string().required("Please enter email").email("Please enter a valid email"),
+  phone: yup.string().required("Please enter phone"),
+  address: yup.string().required("Please enter address"),
+  paymentMethod: yup.string().required("Please choose payment method"),
+});
+export type CreateContractFormValues = yup.InferType<typeof createContractFormValidator>;
