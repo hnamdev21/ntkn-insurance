@@ -2,6 +2,7 @@ import { message } from "antd";
 import axios, { AxiosRequestConfig } from "axios";
 
 import env from "@/constants/env";
+import statusCode from "@/constants/statusCode";
 
 export const axiosInstance = axios.create({
   // baseURL: process.env.NEXT_PUBLIC_API_DEPLOYMENT_URL,
@@ -23,6 +24,8 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response) message.error(error.response.data.message);
+    if (error.response.status === statusCode.UNAUTHORIZED) window.location.href = "/login";
+
     return Promise.reject(error);
   }
 );

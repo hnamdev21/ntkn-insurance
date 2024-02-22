@@ -1,11 +1,12 @@
 "use client";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Spin } from "antd";
+import { message, Spin } from "antd";
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as yup from "yup";
 
+import { post } from "@/apis/axiosInstance";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input from "@/components/Form/Input";
@@ -16,25 +17,27 @@ import { path } from "@/constants/route";
 
 import styles from "./styles.module.scss";
 
-const TIMEOUT = 1000;
 const formValidator = yup.object().shape({
   email: yup.string().required("Please enter email").email("Please enter a valid email"),
 });
 
 const ForgotPasswordPage = () => {
   // prettier-ignore
-  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm({
+  const { register, handleSubmit, formState: { isSubmitting, errors }, reset } = useForm({
     resolver: yupResolver(formValidator),
     mode: "onBlur",
   });
 
   const onSubmit = async (data: FieldValues) => {
-    // Fake API call
-    await new Promise((resolve) => {
-      setTimeout(resolve, TIMEOUT);
-    });
+    try {
+      const response = await post("/users/forgot-password", data);
 
-    return data;
+      if (response.success) {
+        message.success("Please check your email to reset password");
+      }
+    } catch (error) {
+      reset();
+    }
   };
 
   return (

@@ -1,0 +1,40 @@
+.form {
+  display: flex !important;
+  align-items: flex-end !important;
+  gap: rem(16px) !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.heading {
+  background-color: var(--color-tint-t1);
+  border-radius: rem(8px) rem(8px) 0 0;
+}
+
+.row {
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--color-tint-t4);
+  }
+
+  .col {
+    &:not(:last-child) {
+      border-right: rem(1px) solid var(--color-tint-t2);
+    }
+  }
+}
+
+.claimForm {
+  padding: rem(6px) 0 !important;
+  border: none !important;
+  border-radius: unset !important;
+  box-shadow: none !important;
+
+  &__input {
+    padding: rem(3px) rem(3px) !important;
+    border-radius: rem(4px) !important;
+  }
+}
