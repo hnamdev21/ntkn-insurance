@@ -40,3 +40,7 @@ export const paymentMethodOptions = [
   { label: "Credit Card", value: "1" },
   { label: "Loan", value: "2" },
 ];
+
+export const defaultClaimOptions = [
+  { label: "-- Select a contract --", value: "", disabled: true },
+];

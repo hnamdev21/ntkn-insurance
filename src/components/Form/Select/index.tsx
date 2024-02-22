@@ -5,7 +5,7 @@ import { Text } from "@/components/Typography";
 
 import styles from "./styles.module.scss";
 
-type Option = {
+export type Option = {
   value: string;
   label: string;
   disabled?: boolean;
