@@ -1,21 +1,22 @@
 "use client";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Spin } from "antd";
+import { message, Spin } from "antd";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as yup from "yup";
 
+import { post } from "@/apis/axiosInstance";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
-import Input, { InputPassword } from "@/components/Form/Input";
+import { InputPassword } from "@/components/Form/Input";
 import Label from "@/components/Form/Label";
 import MessageError from "@/components/Form/MessageError";
 import Typography from "@/components/Typography";
+import { path } from "@/constants/route";
 
-const TIMEOUT = 1000;
 const formValidator = yup.object().shape({
-  oldPassword: yup.string().required("Please enter old password"),
   password: yup.string().required("Please enter password"),
   confirmPassword: yup
     .string()
@@ -24,24 +25,25 @@ const formValidator = yup.object().shape({
 });
 
 const ResetPassword = ({ params }: { params: { token: string } }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting, errors },
-  } = useForm({
+  const router = useRouter();
+
+  // prettier-ignore
+  const { register, handleSubmit, formState: { isSubmitting, errors }, reset } = useForm({
     resolver: yupResolver(formValidator),
     mode: "onBlur",
   });
 
   const onSubmit = async (data: FieldValues) => {
-    // Fake API call
-    await new Promise((resolve) => {
-      setTimeout(resolve, TIMEOUT);
-    });
+    try {
+      const response = await post("/users/reset-password/" + params.token, data);
 
-    params;
-
-    return data;
+      if (response.success) {
+        message.success("Reset password successfully");
+        router.push(path.Login);
+      }
+    } catch (error) {
+      reset();
+    }
   };
 
   return (
@@ -55,19 +57,6 @@ const ResetPassword = ({ params }: { params: { token: string } }) => {
       >
         Reset Password
       </Typography>
-
-      <Form.Item>
-        <Label htmlFor="oldPassword" required>
-          Password
-        </Label>
-        <Input
-          id="oldPassword"
-          {...register("oldPassword")}
-          autoComplete="on"
-          error={errors.oldPassword && true}
-        />
-        {errors.oldPassword && <MessageError>{errors.oldPassword.message as string}</MessageError>}
-      </Form.Item>
 
       <Form.Item>
         <Label htmlFor="password" required>
@@ -85,7 +74,7 @@ const ResetPassword = ({ params }: { params: { token: string } }) => {
 
       <Form.Item>
         <Label htmlFor="confirmPassword" required>
-          Password
+          Confirm password
         </Label>
         <InputPassword
           type="password"

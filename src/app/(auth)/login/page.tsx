@@ -15,6 +15,7 @@ import Label from "@/components/Form/Label";
 import MessageError from "@/components/Form/MessageError";
 import Typography from "@/components/Typography";
 import { path } from "@/constants/route";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 import styles from "./styles.module.scss";
 
@@ -27,6 +28,7 @@ const formValidator = yup.object().shape({
 
 const LoginPage = () => {
   const router = useRouter();
+  const [role, setRole] = useLocalStorage<number | null>("role", null);
 
   // prettier-ignore
   const { register, handleSubmit, formState: { isSubmitting, errors }, resetField } = useForm({
@@ -36,13 +38,27 @@ const LoginPage = () => {
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      const response = await post("/users/login", data);
+      const response = await post<
+        {
+          id: number;
+          fullName: string;
+          username: string;
+          email: string;
+          avatar: string;
+          role: number;
+          status: number;
+        },
+        FieldValues
+      >("/users/login", data);
 
       if (response.success) {
+        setRole(response.data.role);
+
         message.success("Login successfully");
         router.push(path.Home);
       }
     } catch (error) {
+      role; // JUST FOR IGNORE ESLINT
       resetField("password");
     }
   };

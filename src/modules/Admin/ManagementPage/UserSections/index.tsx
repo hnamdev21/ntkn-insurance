@@ -6,51 +6,20 @@ import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import * as yup from "yup";
 
+import { get, post } from "@/apis/axiosInstance";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input from "@/components/Form/Input";
 import Label from "@/components/Form/Label";
 import Select from "@/components/Form/Select";
 import Typography from "@/components/Typography";
+import { User } from "@/constants/data";
+import { defaultValueUserFilter } from "@/constants/defaultValue";
+import { roleOptions, sortOptions, statusOptions } from "@/constants/other";
+import useDebounce from "@/hooks/useDebounce";
 
 import styles from "./styles.module.scss";
 
-// GENERATE 10 MOCK DATA
-const TOTAL_MOCK_DATA = 10;
-const MAX_ADMIN = 2;
-const NUMBER_MAKE_ID_TO_STRING = 65;
-
-const MOCK_DATA = [
-  ...[...Array(TOTAL_MOCK_DATA)].map((_, index) => ({
-    id: index,
-    name: `Nguyen Van ${String.fromCharCode(NUMBER_MAKE_ID_TO_STRING + index)}`,
-    email: `${String.fromCharCode(NUMBER_MAKE_ID_TO_STRING + index)}@gmail.com`,
-    address: "Hanoi",
-    phone: "0123456789",
-    role: index < MAX_ADMIN ? "Admin" : "User",
-    status: "Active",
-  })),
-];
-
-const roleOptions = [
-  { label: "All", value: "all" },
-  { label: "Admin", value: "admin" },
-  { label: "User", value: "user" },
-];
-
-const statusOptions = [
-  { label: "All", value: "all" },
-  { label: "Active", value: "active" },
-  { label: "Inactive", value: "inactive" },
-];
-
-const sortOptions = [
-  { label: "Default", value: "default" },
-  { label: "Newest", value: "newest" },
-  { label: "Oldest", value: "oldest" },
-];
-
-const TIMEOUT = 1000;
 const formValidator = yup.object().shape({
   fullName: yup.string().required("Please enter employee full name"),
   username: yup.string().required("Please enter employee username"),
@@ -58,25 +27,61 @@ const formValidator = yup.object().shape({
 });
 
 const UserManagementModule = () => {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [users, setUsers] = React.useState<User[]>([]);
+  const [filter, setFilter] = React.useState(defaultValueUserFilter);
+  const [term, setTerm] = React.useState("");
+  const termDebounce = useDebounce(term);
+
   // prettier-ignore
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm({
     resolver: yupResolver(formValidator),
     mode: "onBlur",
   });
 
-  const onSubmit = async (data: FieldValues) => {
-    // Fake API call
-    await new Promise((resolve) => {
-      setTimeout(resolve, TIMEOUT);
-    });
+  const fetchUsers = async () => {
+    let uri = "/users?";
 
-    return data;
+    if (termDebounce) uri += `term=${termDebounce}&`;
+
+    uri +=
+      `role=${filter.role}&` +
+      `status=${filter.status}&` +
+      `sort=${filter.sort}&` +
+      `page=${filter.page}&` +
+      `limit=${filter.pageSize}`;
+
+    setIsLoading(true);
+
+    const response = await get<[]>(uri);
+
+    if (response.success) {
+      setUsers(response.data);
+    }
+
+    setIsLoading(false);
+    isLoading; // JUST TO DISABLE ESLINT
+  };
+
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      const response = await post("/users/employee", data);
+
+      if (response.success) {
+        fetchUsers();
+      }
+    } catch (error) {
+      //
+    }
   };
 
   const onPageChange = (page: number, pageSize: number) => {
-    page;
-    pageSize;
+    setFilter({ ...filter, page, pageSize });
   };
+
+  React.useEffect(() => {
+    fetchUsers();
+  }, [termDebounce, filter]);
 
   return (
     <div>
@@ -117,7 +122,12 @@ const UserManagementModule = () => {
 
       <div className="flex mb-[2.4rem] gap-[3.2rem]">
         <div className="w-1/3">
-          <Input id="search" name="search" placeholder="Enter name, email, ..." />
+          <Input
+            id="search"
+            name="search"
+            placeholder="Enter name, email, ..."
+            onChange={(event) => setTerm(event.target.value)}
+          />
         </div>
 
         <div className="flex-1 flex gap-[3rem]">
@@ -126,7 +136,14 @@ const UserManagementModule = () => {
               Role
             </Typography>
 
-            <Select id="tag" name="tag" options={roleOptions} />
+            <Select
+              id="tag"
+              name="tag"
+              options={roleOptions}
+              onChange={(event) =>
+                setFilter({ ...filter, role: (event.target as HTMLSelectElement).value })
+              }
+            />
           </div>
 
           <div className="flex gap-[1.2rem] items-center">
@@ -134,7 +151,14 @@ const UserManagementModule = () => {
               Status
             </Typography>
 
-            <Select id="status" name="status" options={statusOptions} />
+            <Select
+              id="status"
+              name="status"
+              options={statusOptions}
+              onChange={(event) =>
+                setFilter({ ...filter, status: (event.target as HTMLSelectElement).value })
+              }
+            />
           </div>
 
           <div className="flex gap-[1.2rem] items-center">
@@ -142,7 +166,14 @@ const UserManagementModule = () => {
               Sort
             </Typography>
 
-            <Select id="sort" name="sort" options={sortOptions} />
+            <Select
+              id="sort"
+              name="sort"
+              options={sortOptions}
+              onChange={(event) =>
+                setFilter({ ...filter, sort: (event.target as HTMLSelectElement).value })
+              }
+            />
           </div>
         </div>
       </div>
@@ -195,7 +226,7 @@ const UserManagementModule = () => {
         </thead>
 
         <tbody>
-          {MOCK_DATA.map((user) => (
+          {users.map((user) => (
             <tr key={user.id} className={`flex w-full py-[0.6rem] ${styles.row}`}>
               <td className={`w-1/12 px-[1rem] ${styles.col}`}>
                 <Typography tag="p" fontWeight="fw-md">
@@ -205,7 +236,7 @@ const UserManagementModule = () => {
 
               <td className={`w-1/3 px-[1rem] ${styles.col}`}>
                 <Typography tag="p" fontWeight="fw-md">
-                  {user.name}
+                  {user.fullName}
                 </Typography>
               </td>
 
