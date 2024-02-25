@@ -8,7 +8,7 @@ export type User = {
   status: number;
 };
 
-export type Claim = {
+export type ClaimDetail = {
   id: number;
   coverage: string;
   insuranceAmount: number;
@@ -23,11 +23,8 @@ export type Policy = {
   contractMonthTerm: number;
   feeAmount: number;
   rating: number;
-  claimDetails: Claim[];
+  claimDetails: ClaimDetail[];
 };
-
-export type PolicyForm = Omit<Policy, "claimDetails" | "slug">;
-export type ClaimForm = Omit<Claim, "id">;
 
 export type Contract = {
   id: number;
@@ -36,4 +33,20 @@ export type Contract = {
   createdAt: string;
   status: number;
   policy: Policy;
+};
+
+export type ClaimImage = {
+  id: number;
+  claimRequestId: number;
+  imagePath: string;
+};
+
+export type ClaimRequest = {
+  id: number;
+  contractId: number;
+  claimId: number;
+  content: string;
+  status: number;
+  claimImages: ClaimImage[];
+  claimDetail: ClaimDetail;
 };

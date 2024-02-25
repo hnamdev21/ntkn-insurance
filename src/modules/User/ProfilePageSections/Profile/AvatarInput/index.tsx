@@ -17,7 +17,7 @@ const AvatarInputComponent = (
 ) => {
   const src =
     avatarBase64 ??
-    (props.src && `${env.API_LOCAL_URL}/${props.src}`) ??
+    (props.src ? `${env.API_LOCAL_URL}/${props.src}` : undefined) ??
     "/images/default-avatar.png";
 
   return (
@@ -40,7 +40,6 @@ const AvatarInputComponent = (
         style={{ display: "none" }}
         id="avatarImage"
         ref={ref}
-        // onChange={handleOnChangeAvatar}
         {...props}
       />
     </div>

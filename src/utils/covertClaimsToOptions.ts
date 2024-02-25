@@ -1,7 +1,7 @@
 import { Option } from "@/components/Form/Select";
-import { Claim } from "@/constants/data";
+import { ClaimDetail } from "@/constants/data";
 
-const convertClaimsToOptions = (claims: Claim[]): Option[] => {
+const convertClaimsToOptions = (claims: ClaimDetail[]): Option[] => {
   return claims.map((claim) => ({
     label: claim.coverage,
     value: claim.id.toString(),

@@ -3,7 +3,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { message, Spin } from "antd";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 
 import { get, post, put } from "@/apis/axiosInstance";
 import Button from "@/components/Button";
@@ -12,7 +12,7 @@ import Input from "@/components/Form/Input";
 import Label from "@/components/Form/Label";
 import MessageError from "@/components/Form/MessageError";
 import Typography from "@/components/Typography";
-import { Claim, ClaimForm, Policy, PolicyForm } from "@/constants/data";
+import { ClaimDetail, Policy } from "@/constants/data";
 import {
   createClaimFormValidator,
   policyFormValidator,
@@ -28,7 +28,7 @@ type Props = {
 const PolicyDetailModule = ({ slug }: Props) => {
   const [editClaimMode, setEditClaimMode] = React.useState<boolean>(false);
   const [editPolicyMode, setEditPolicyMode] = React.useState<boolean>(true);
-  const [claims, setClaims] = React.useState<Claim[]>([]);
+  const [claims, setClaims] = React.useState<ClaimDetail[]>([]);
 
   // prettier-ignore
   const { register, handleSubmit, formState: { isSubmitting, errors }, setValue } = useForm({
@@ -49,7 +49,7 @@ const PolicyDetailModule = ({ slug }: Props) => {
     mode: "onBlur",
   });
 
-  const switchToEditMode = (claim: Claim) => {
+  const switchToEditMode = (claim: ClaimDetail) => {
     setEditClaimMode(true);
     setValueUpdateClaimForm("id", claim.id);
     setValueUpdateClaimForm("coverage", claim.coverage);
@@ -76,7 +76,7 @@ const PolicyDetailModule = ({ slug }: Props) => {
     }
   };
 
-  const onSubmitCreateClaim = async (data: ClaimForm) => {
+  const onSubmitCreateClaim = async (data: FieldValues) => {
     try {
       const response = await post("/claimDetails", data);
 
@@ -90,7 +90,7 @@ const PolicyDetailModule = ({ slug }: Props) => {
     }
   };
 
-  const onSubmitUpdateClaim = async (data: Claim) => {
+  const onSubmitUpdateClaim = async (data: ClaimDetail) => {
     try {
       const response = await put("/claimDetails/" + data.id, data);
 
@@ -105,7 +105,7 @@ const PolicyDetailModule = ({ slug }: Props) => {
     }
   };
 
-  const onSubmit = async (data: PolicyForm) => {
+  const onSubmit = async (data: FieldValues) => {
     try {
       const response = await put("/policies/" + data.id, data);
 
